@@ -1,0 +1,134 @@
+\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\settemplatedir{../template/}%设置模板路径
+
+\exname{光的偏振应用研究} %实验名称
+\extable{} %实验桌号
+\instructor{} %指导教师
+\class{} %班级
+\name{} %姓名
+\stuid{} %学号
+
+\nyear{} %年
+\nmonth{} %月
+\nday{} %日
+\nweekday{} %星期几，e.g. \nweekday{三}
+\daypart{}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+
+\begin{document}
+\maketitle%输出封面
+
+\section{预习报告（10分）}
+（注：将已经写好的“物理实验预习报告”内容拷贝过来）
+
+\subsection{实验综述（5分）}
+（自述实验现象、实验原理和实验方法，包括必要的光路图、电路图、公式等。不超过500字。）
+\subsubsection{实验原理}
+光波是电磁横波，其传播方向由电场矢量 $\vec{E}$ 与磁场矢量 $\vec{H}$ 的叉积 $\vec{E} \times \vec{H}$ 确定。在光学中，电场矢量 $\vec{E}$ 被称为光矢量，光强 $I$ 与光矢量振幅的平方 $E^2$ 成正比。
+
+根据电磁场理论的边值条件，可以推导出光波在两种各向同性介质分界面上反射时，反射波电场分量与入射波电场分量之比，即菲涅耳公式：
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{垂直.pdf}
+        \caption{$\vec{E}$垂直于入射面的分量}
+        \label{pic:ve}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{平行.pdf}
+        \caption{$\vec{E}$平行于入射面的分量}
+        \label{pic:pa}
+    \end{subfigure}
+\caption{光在介面反射光和入射光的光强之比}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{$\vec{E}$ 垂直于入射面 (s-分量)}
+
+    当电场矢量 $\vec{E}$ 垂直于入射面时（s-分量，如\cref{pic:ve}），反射系数为：
+    \begin{equation}
+        \frac{E_1}{E_0} = - \frac{\sin(\theta_0 - \theta_2)}{\sin(\theta_0 + \theta_2)}\label{eq:1}
+    \end{equation}
+
+    \item \textbf{$\vec{E}$ 平行于入射面 (p-分量)}
+
+    当电场矢量 $\vec{E}$ 平行于入射面时（p-分量，如\cref{pic:pa}），反射系数为：
+    \begin{equation}
+    \frac{E_1}{E_0} = \frac{\tan(\theta_0 - \theta_2)}{\tan(\theta_0 + \theta_2)}\label{eq:2}
+    \end{equation}
+\end{enumerate}
+
+由\cref{eq:2}可知，在 $\theta_0 + \theta_2 = \ang{90}$ 的特定条件下（此时 $\tan(\theta_0 + \theta_2) \to \infty$），平行于入射面的电场分量 $E_1$ 为零，即该分量不发生反射。
+此时，反射光仅包含垂直于入射面的电场分量，成为线偏振光。满足此条件的入射角 $\theta_0$ 称为布儒斯特角。
+
+偏振片是一种光学元件，它利用二向色性（选择性吸收）原理，将入射的非偏振光转换为线偏振光。其内部存在一个特定方向，称为偏振化方向，只有振动方向平行于该轴的光矢量分量能够通过，而垂直于该轴的分量则被强烈吸收。
+
+当一束强度为 $I_0$ 的线偏振光垂直入射到偏振片上时，若其光矢量振动方向与偏振片的偏振化方向成 $\alpha$ 角，则透射光的光强 $I$ 遵循马吕斯定律：
+\begin{equation}
+I = I_0 \cos^2 \alpha
+\end{equation}
+其中 $\alpha$ 为入射光光矢量方向与偏振片偏振化方向的夹角。
+\subsubsection{实验内容}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{实验装置.pdf}
+    \caption{实验装置示意图}
+    \label{equip}
+\end{figure}
+    \paragraph{测量黑色平板的布儒斯特角 ($\alpha_0$)}
+
+    如\cref{equip}所示，调节光路准直。调节入射光使其为 p-偏振光（即偏振方向平行于入射面）。旋转旋臂，使 p-偏振光以不同角度入射，并调节光电池位置以接收反射光。
+    观测万用表示数（光电流），寻找反射光强最小的位置。
+
+    在平台角度盘的左、右两侧分别读取实现光强最小的时候旋臂的角度 $\theta_1$ 和 $\theta_2$。布儒斯特角可由 $\alpha_1 = \frac{1}{2} |\theta_1 - 180^\circ|$ 与 $\alpha_2 = \frac{1}{2} |\theta_2 - 180^\circ|$ 确定。取平均值，即：
+    \begin{equation}
+        \alpha_0 = \frac{1}{2} |\theta_2 - \theta_1|
+    \end{equation}
+    则该黑色平板的折射率 $n$ 可由布儒斯特定律计算得出：
+    \begin{equation}
+        n = \tan \alpha_0 \tag{6}
+    \end{equation}
+    \paragraph{确定偏振片的偏振化方向}\label{1}
+    在\cref{equip}中反射光射入的位置放置一偏振片。保持入射角为上一步测得的布儒斯特角 $\alpha_0$。根据菲涅耳公式，此时 p-偏振光被完全透射，反射光为纯粹的 s-偏振光。
+
+    旋转检偏器 P，观测光电流信号。当光电流达到最大值时，检偏器的偏振化方向与 s-偏振光的振动方向平行。记录此时检偏器指针的读数 $\varphi_0$。
+    \paragraph{验证光电流和入射光强的关系}
+    在之前的基础上，以 $\varphi_0$ 为基准，旋转偏振片，使其透振轴与 s-偏振光方向（即最大光强方向）的夹角为 $\varphi$。
+
+    测量并记录一系列不同 $\varphi$ 角度所对应的光电流 $i(\varphi)$。绘制 $i - \cos^2 \varphi$ 关系图，分析光电流 $i$ 与 $\cos^2 \varphi$ 之间的线性关系，以验证马吕斯定律。
+\subsection{实验重点（3分）}
+（简述本实验的学习重点，不超过100字。）
+\begin{enumerate}
+    \item 设计一种可以测量不透明物体的折射率的方法
+    \item 研究光电流和入射光强的关系
+    \item 线偏振光入射黑色平板时，设计实验测量反射率
+\end{enumerate}
+\subsection{实验难点（2分）}
+（简述本实验的实现难点，不超过100字。）
+\begin{enumerate}
+    \item 环境光强会变化，测量出来的角度和光电流可能会有偏差
+    \item 偏振片转动幅度小时，由于仪器精度的问题，可能读数不会发生改变
+\end{enumerate}
+\begin{fullreportonly}
+\section{原始数据（20分）}
+（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+
+\section{结果与分析（60分）}
+\subsection{数据处理与结果（30分）}
+（列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+
+\subsection{误差分析（20分）}
+（运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+
+\subsection{实验探讨（10分）}
+（对实验内容、现象和过程的小结，不超过100字。）
+
+\section{思考题（10分）}
+（解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+\end{fullreportonly}
+\insertnotes
+\end{document}
