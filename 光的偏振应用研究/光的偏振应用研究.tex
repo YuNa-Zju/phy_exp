@@ -1,6 +1,6 @@
-\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
 \settemplatedir{../template/}%设置模板路径
-
+\usepackage{diagbox}
 \exname{光的偏振应用研究} %实验名称
 \extable{} %实验桌号
 \instructor{} %指导教师
@@ -16,10 +16,8 @@
 
 \redate{} %如有实验补做，补做日期
 \resitu{} %情况说明：
-
 \begin{document}
 \maketitle%输出封面
-
 \section{预习报告（10分）}
 （注：将已经写好的“物理实验预习报告”内容拷贝过来）
 
@@ -90,7 +88,8 @@ I = I_0 \cos^2 \alpha
     \end{equation}
     则该黑色平板的折射率 $n$ 可由布儒斯特定律计算得出：
     \begin{equation}
-        n = \tan \alpha_0 \tag{6}
+        n = \tan \alpha_0
+        \label{eq:6}
     \end{equation}
     \paragraph{确定偏振片的偏振化方向}\label{1}
     在\cref{equip}中反射光射入的位置放置一偏振片。保持入射角为上一步测得的布儒斯特角 $\alpha_0$。根据菲涅耳公式，此时 p-偏振光被完全透射，反射光为纯粹的 s-偏振光。
@@ -120,15 +119,176 @@ I = I_0 \cos^2 \alpha
 \section{结果与分析（60分）}
 \subsection{数据处理与结果（30分）}
 （列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+\subsubsection{测量黑色平板折射率}
+\begin{table}[H]
+\centering
+\caption{测量黑色平板折射率}
+\label{tab:n}
+\begin{tabular}{|l|l|l|l|}
+\hline
+组数 & \begin{tabular}[c]{@{}l@{}}左侧角坐标\\ $\theta_1$\end{tabular} & \begin{tabular}[c]{@{}l@{}}右侧角坐标\\ $\theta_2$\end{tabular} & 布儒斯特角 \\ \hline
+1 & \ang{76.1} & \ang{295.0} & \ang{54.7} \\ \hline
+2 & \ang{76.0}   & \ang{291.0} & \ang{53.8}  \\ \hline
+3 & \ang{75.0}   & \ang{296.0} & \ang{55.2}  \\ \hline
+4 & \ang{75.9} & \ang{295.0} & \ang{54.8} \\ \hline
+5 & \ang{76.0}   & \ang{297.0} & \ang{55.2}  \\ \hline
+6 & \ang{75.2} & \ang{296.0} & \ang{55.2}  \\ \hline
+\end{tabular}%
+\end{table}
+由\cref{tab:n}，布儒斯特角的平均值为
+\[\overline{\alpha_0} = \frac{\alpha_1 + \alpha_2 + \cdots + \alpha_6}{6} = \ang{54.8}\]
+其中A类不确定度为
+\[
+u_A = \sqrt{\frac{1}{n(n - 1)} \sum_{i=1}^n (\alpha_i - \overline{\alpha_0})^2} = \ang{0.55}
+\]
 
+B类不确定度取仪器最小刻度，即
+\[u_B = \frac{\ang{1}}{\sqrt{3}} = \ang{0.6}\]
+则布儒斯特角的综合不确定度为
+\[u_C = \sqrt{u_A^2 + u_B^2} = \ang{0.8}\]
+因此，布儒斯特角的测量结果为
+\[\alpha_0 = \overline{\alpha_0} \pm u_C = \ang{54.8} \pm \ang{0.8}\]
+由布儒斯特定律（\cref{eq:6}），黑色平板的折射率为：
+\[
+n = \tan \alpha = 1.42 \pm 0.04
+\]
+\
+\subsubsection{偏振片的偏振化方向}
+\begin{table}[H]
+\centering
+\caption{测量偏振片偏振化角度}
+\label{tab:ang}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\diagbox{组数}{角度}{光电流} & 极大值  & 极小值   & 极大值   & 极小值   \\ \hline
+1  & \ang{72.0} & \ang{159.0} & \ang{259.0} & \ang{338.0} \\ \hline
+2  & \ang{71.5} & \ang{159.5} & \ang{257.0} & \ang{340.0} \\ \hline
+\end{tabular}
+\end{table}
+将每个角度持续减去\ang{90}，则得到
+\begin{table}[H]
+\centering
+\caption{测量偏振片偏振化角度}
+\label{tab:ang:final}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\diagbox{组数}{角度}{光电流} & 极大值  & 极小值   & 极大值   & 极小值   \\ \hline
+1  & \ang{72.0} & \ang{69.0} & \ang{79.0} & \ang{68.0} \\ \hline
+2  & \ang{71.5} & \ang{69.5} & \ang{77.0} & \ang{70.0} \\ \hline
+\end{tabular}
+\end{table}
+根据该数据，计算平均值，A类不确定度，B类不确定度以及合成不确定度：
+\[\overline{\beta} = \frac{\beta_1 + \beta_2 + \cdots + \beta_6}{6} = \ang{72.0}\]
+A类不确定度为角度的标准偏差：
+\[u_A = \sqrt{\frac{1}{n(n - 1)} \sum_{i=1}^n (\beta_i - \overline{\beta})^2} = \ang{1.4}\]
+B类不确定度取仪器的最小分度值\ang{;1;}
+\[u_B = \frac{\ang{1}}{\sqrt{3}} = \ang{0.6}\]
+则合成不确定度为：
+\[u = \sqrt{u_A^2 + u_B^2} = \ang{1.5}\]
+则得到最终结果：
+\[\beta = \ang{72.0} \pm \ang{1.5}\]
+\subsubsection{判断光电流和光强的关系}
+\begin{table}[H]
+\centering
+\caption{光电流和入射光强的关系}
+\label{tab:intense}
+\begin{tabular}{|l|l|l|}
+\hline
+组数 & 角度  & 光电流大小 \\ \hline
+1  & \ang{22}  & \SI{116.4}{\micro \ampere} \\ \hline
+2  & \ang{32}  & \SI{157.6}{\micro \ampere} \\ \hline
+3  & \ang{42}  & \SI{197.0}{\micro \ampere} \\ \hline
+4  & \ang{52}  & \SI{231.0}{\micro \ampere} \\ \hline
+5  & \ang{62}  & \SI{249.0}{\micro \ampere} \\ \hline
+6  & \ang{72}  & \SI{255.0}{\micro \ampere} \\ \hline
+7  & \ang{82}  & \SI{246.0}{\micro \ampere} \\ \hline
+8  & \ang{92}  & \SI{221.0}{\micro \ampere} \\ \hline
+9  & \ang{102} & \SI{185.0}{\micro \ampere} \\ \hline
+10 & \ang{112} & \SI{142.9}{\micro \ampere} \\ \hline
+\end{tabular}
+\end{table}
+
+分别计算\[\Delta \varphi = \varphi - \beta\]可以画出
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{Code_Generated_Image.png}
+    \caption{光电流和光强的关系}
+\end{figure}
+从图中可以看见，光电流大小和光强近似成线性关系。
 \subsection{误差分析（20分）}
 （运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
 
+误差可能出现的原因：
+\begin{enumerate}[leftmargin = 6em]
+    \item 背景的光强不为0，测量得到的光电流可能会有偏移的情况
+
+    该误差可以通过关闭实验光，测量环境光，并在之后实验时将环境光强减去。
+    \item 探测器旋臂有宽度，刀口并不是正对刻度，导致读数角度并不是实际的角度
+
+    该误差可以类似分光计避免偏心误差的方式，左右两边同时测量一次取平均值，消除该误差。
+    \item 指针在一定角度偏移时，光电流精度较小，示数不变，无法确定极值位置
+
+    该误差可以通过测量两次光电流不变的位置，取平均值记下，来尽量减小。
+\end{enumerate}
 \subsection{实验探讨（10分）}
 （对实验内容、现象和过程的小结，不超过100字。）
+本次实验收获颇丰。实验设计巧妙地结合了两个核心物理原理。
 
+在测定折射率的实验中，我们利用了光的偏振特性，通过观测反射光强度随角度的变化来确定布儒斯特角，并据此成功计算出了黑色平板的折射率。
+
+在另一部分实验中，我们使用了硅光二极管作为传感器，实现了将光信号转化为电信号的测量，并通过数据验证了光电流与光照强度之间的对应关系。
+
+此次实验使我对光的波动，光的偏振等知识有了更深入、更融会贯通的理解。
 \section{思考题（10分）}
 （解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+\subsection{请简述减小实验误差的方法}
+针对背景光强的问题，可以通过关闭实验光，测量环境光，并在之后实验时将环境光强减去。
+
+针对无法准确读取旋臂角度的问题，可以采用类似分光计避免偏心误差的方式，左右两边同时测量一次取平均值，消除该误差。
+
+针对光电流精度较小，无法准确度数的问题，可以通过测量两次光电流不变的位置，取平均值记下，来尽量减小。
+\subsection{在探究光电流和光照强度关系的时候，背景光照的影响是怎样的}
+背景光强可能导致无实验光照射时，光电流传感器仍然有微弱的读数，
+导致测量光电流和光强关系时，直线不过原点，而是有一定偏差。
+
+可以在无实验光照射时先读出光电流强度，在之后实验时减去该读数，使得光电流的零点不漂移。
+
+\subsection{选择题}
+下列哪些波能够发生偏振现象？
+\begin{table}[H]
+\centering
+\begin{tabular}{C{.2\textwidth}C{.2\textwidth}C{.2\textwidth}C{.2\textwidth}}
+A. 声波 & B. 电磁波 & C. 地震波P波 & D. 水波
+\end{tabular}
+\end{table}
+电磁波可以发生偏振。
+\begin{enumerate}[label=\Alph*. , leftmargin = 6em]
+    \item 声波为纵波，它的振动方向和波传播的方向平行，没办法产生偏振现象。
+    \item 电磁波是横波，其中电场和磁场相互垂直振动，且垂直于传播方向，所以可以发生偏振现象。
+    \item 地震P波是纵波，可以在固体，液体和气体中传播，但是振动类似于弹簧挤压，振动方向平行于传播方向，所以不能产生偏振现象。
+
+    *但是S波是横波，只能在固体中传播，可以发生偏振现象。
+    \item 水波是横波和纵波的合成波，虽然其振动有垂直于传播方向的分量，但其偏振现象不像电磁波那样明显。
+\end{enumerate}
+\subsection{如何调整两块平行放置的偏振片的透振方向，让通过的太阳光的光强获得最大值和最小值}
+当非偏振的太阳光通过第一块偏振片后，光强变为 $I_1 = \frac{1}{2} I_0$，且变为线偏振光。
+这束线偏振光再通过第二块偏振片，设两块偏振片的透振方向夹角为 $\theta$，
+根据马吕斯定律，
+最终透射光强为：
+$$I = I_1 \cos^2(\theta) = \frac{1}{2} I_0 \cos^2(\theta)$$
+
+\textbf{获得最大值：}要使光强 $I$ 最大，需要 $\cos^2(\theta)$ 最大，即 $\cos^2(\theta) = 1$。
+
+此时 $\theta = \ang{0}$ 或 \ang{180}。
+
+操作：调整两块偏振片，使它们的透振方向相互平行。
+
+\textbf{获得最小值：}要使光强 $I$ 最小，需要 $\cos^2(\theta)$ 最小，即 $\cos^2(\theta) = 0$。
+此时 $\theta = \ang{90}$ 或 \ang{270}。
+
+操作：调整两块偏振片，使它们的透振方向相互垂直。
+
+此时，理想情况下透射光强为0。
 \end{fullreportonly}
 \insertnotes
 \end{document}
