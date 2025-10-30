@@ -1,0 +1,183 @@
+\documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告
+\settemplatedir{../template/}%设置模板路径
+
+\exname{惠斯登电桥} %实验名称
+\extable{} %实验桌号
+\instructor{刘公羽} %指导教师
+\class{信息工程2401} %班级
+\name{徐圣扬} %姓名
+\stuid{3240103435} %学号
+
+\nyear{2025} %年
+\nmonth{10} %月
+\nday{29} %日
+\nweekday{三} %星期几，e.g. \nweekday{三}
+\daypart{上午}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+\begin{document}
+\maketitle
+
+\section{预习报告（10分）}
+（注：将已经写好的“物理实验预习报告”内容拷贝过来）
+
+\subsection{实验综述（5分）}
+（自述实验现象、实验原理和实验方法，包括必要的光路图、电路图、公式等。不超过500字。）
+
+如图所示，$R_1$、$R_2$、$R_s$ 和 $R_x$ 共同组成一个电桥电路，$R_x$ 为待测电阻，$R_s$ 为标准电阻，$R_1$ 和 $R_2$ 为比率臂电阻，$E$ 为直流电源，$G$ 为检流计。当电桥平衡时，检流计指针指零，此时有
+\[
+    R_x = \frac{R_1}{R_2} R_s
+\]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{微信图片_20251028221242_36_325.jpg}
+    \caption{惠斯登电桥实验电路图}
+    \label{fig:电桥}
+\end{figure}
+\subsubsection{实验原理}
+
+当电桥平衡时，检流计电流\(I_G = 0\)，即B、D两点电位相等（\(V_B = V_D\)）。支路电流关系：\(I_1 = I_x\)，\(I_2 = I_S\)。电压降关系：\(I_1 R_1 = I_2 R_2\)，\(I_x R_x = I_S R_S\)。联立可得平衡条件：\(\frac{R_1}{R_2} = \frac{R_x}{R_S} \quad \text{或} \quad R_x = R_S \cdot \frac{R_1}{R_2}\)
+
+\subsubsection{实验方法}
+
+\begin{enumerate}
+    \item 器材准备惠斯登电桥实验装置；待测电阻\(R_x\)、标准可变电阻\(R_S\)、已知比例的电阻\(R_1\)、\(R_2\)；直流电源、开关、导线等。
+    \item 实验步骤电路连接：按原理图连接四个电阻臂、检流计和电源。初步调节：选择合适的\(R_1/R_2\)比例，预估\(R_S\)的大致范围。
+    \item 平衡调节：闭合电源开关，缓慢调节\(R_S\)的阻值，观察检流计指针偏转。若指针偏转方向变化，逐步缩小\(R_S\)的调节范围，直到检流计指针精确指零。
+    \item 数据记录与计算：记录平衡时的\(R_1\)、\(R_2\)、\(R_S\)，根据平衡条件计算\(R_x\)。多次测量：改变\(R_1/R_2\)的比例，取平均值以提高精度。
+    \item 精度优化选择\(R_1/R_2\)为整数比例，简化计算并减小误差。确保检流计灵敏度足够，可通过串联保护电阻防止初始大电流损坏检流计，平衡前接入，平衡时移除。
+\end{enumerate}
+
+\subsubsection{实验现象}
+
+\begin{enumerate}
+    \item 当\(R_S\)未调节至平衡值时，检流计指针明显偏转
+    \item 当\(R_S\)满足平衡条件时，检流计指针精确指零，此时无论怎样微调\(R_S\)，指针均不再偏转。
+    \item 调节\(R_S\)时，指针偏转角度逐渐减小，最终归零，直观体现了电桥从 “不平衡” 到 “平衡” 的过渡。
+\end{enumerate}
+
+\subsection{实验重点（3分）}
+（简述本实验的学习重点，不超过100字。）
+\begin{enumerate}
+    \item 掌握惠斯登电桥工作原理及其特点，学会自组电桥测量未知电阻。
+    \item 学习如何对测量结果进行误差分析。
+\end{enumerate}
+\subsection{实验难点（2分）}
+（简述本实验的实现难点，不超过100字。）
+\begin{enumerate}
+    \item  检流计上的“电计”与“短路”按钮都具有锁定功能，测量时要确保“短路”按钮未锁定，否则检流计不会有偏转。
+    \item 实验结束，关闭检流计和盒式惠斯登电桥。
+\end{enumerate}
+
+\begin{fullreportonly}
+\section{原始数据（20分）}
+（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{微信图片_20251030170434_109_118.jpg}
+    \caption{原始数据记录}
+    \label{fig:原始数据}
+\end{figure}
+\section{结果与分析}
+\subsection{数据处理与结果}
+\subsubsection{交换法测量未知电阻}
+实验一中，设置$R_1=R_2 = 8000 \si{\ohm}$。
+测得$R_s = \SI{222.8}{\ohm}，R_s = \SI{222.7}{\ohm}$。
+可知此时倍率为$\frac{R_1}{R_2} = 1 $，待测电阻阻值为
+\[\overline{R_x} = \sqrt{R_s R'_s} = \SI{222.7}{\ohm}\]
+
+再测量电桥灵敏度，在$R_s$为$\SI{222.7}{\ohm}$时，调整$\Delta R_s = \SI{0.6}{\ohm}$，此时指针偏转了$\Delta d = 12$小格，在$R_s$为$\SI{222.8}{\ohm}$时，调整$\Delta R_s = \SI{0.6}{\ohm}$，此时指针偏转了$\Delta d = 11.5$小格，则电桥灵敏度为
+\[S = \frac{\Delta d}{\frac{\Delta R_s}{R_s}} = \frac{12}{\frac{0.6}{222.7}} = 4454\]
+
+$R_x$ 相对不确定度
+\[E = \frac{\Delta R_x}{\overline{R_x}} = \sqrt{\left(0.001+ \frac{0.002m}{R_s}\right)^2 + \left(\frac{0.2}{S}\right)^2} = 0.10\% \]
+
+则 $\Delta R_x = E \cdot \overline{R_x} = \SI{0.2}{\ohm}$。$R_x = (\overline{R_x} \pm \Delta R_x)\,\si{\ohm} = (222.7 \pm 0.2)\,\si{\ohm}$。
+\subsubsection{用QJ\_23型盒式惠斯登电桥测电阻离散度}
+实验中选择倍率为$0.1$,利用直接法就能算出各待测电阻阻值如\cref{yiduidianzu}所示。
+\begin{table}[H]
+    \caption{测得各电阻数据}
+    \centering
+    \begin{tabular}{C{0.1\textwidth}C{0.08\textwidth}C{0.08\textwidth}C{0.08\textwidth}C{0.08\textwidth}C{0.08\textwidth}C{0.08\textwidth}C{0.08\textwidth}C{0.08\textwidth}}
+        \toprule
+        待测电阻 & $R_1$ & $R_2$ & $R_3$ & $R_4$ & $R_5$ & $R_6$ & $R_7$ & $R_8$ \\
+        \midrule
+        电阻/$\si{\ohm}$ & 678.5 & 675.5 & 680.9 & 684.7 & 679.0 & 681.2 & 679.2 & 683.4 \\
+        \bottomrule
+    \end{tabular}
+    \label{yiduidianzu}
+\end{table}
+这组电阻的均值为$\overline{R_x} = \frac{1}{8}\sum_{i=1}^{8} R_{i} = \SI{680.3}{\ohm}$，标准偏差为$S = \sqrt{\frac{1}{8-1}\sum_{i=1}^{8}(R_{i} - \overline{R_x})^2} = \SI{2.91}{\ohm}$,则离散度为
+\[\frac{S}{\overline{R_x}} \times 100\% = 0.43\% \]
+
+
+\subsection{误差分析}
+\begin{enumerate}
+    \item 电阻箱、标准电阻的标称阻值与实际阻值存在偏差，导致测量结果产生系统误差；
+    \item 电桥平衡时检流计指针难以精确指零，导致读数误差；
+    \item 电阻箱分度值较低，以及电流计的灵敏度过高，无论怎么调整都不能使检流计严格达到零偏，限制了测量结果的准确性；
+    \item 个人读数时会出现偏差，尤其是在调节电阻箱时，读数不够精确；
+    \item 环境温度变化会影响电阻值，进而影响测量结果。
+\end{enumerate}
+\subsection{实验探讨}
+本次实验使用经典的惠斯登电桥法测量电阻，并使用交换法有效降低误差。
+不仅使我对电路原理和实验技巧有了更深刻的认识，
+还使我的数据处理、误差分析和有效数字分析的能力得到显著提升。
+\section{思考题}
+\subsection{为什么用惠斯登电桥测电阻比伏安法测量的准确度高？用电桥法测电阻产生误差的主要因素是什么？}
+
+\subsubsection{准确高的原因}
+\begin{enumerate}
+   \item 惠斯登电桥基于平衡原理，当电桥平衡时检流计无电流，待测电阻\(R_x\)仅由比率臂\(\frac{R_1}{R_2}\)和标准电阻\(R_s\)决定，无需直接测量电流、电压，避免了伏安法中电表内阻引入的系统误差。
+   \item 电桥平衡时，检流计指针指零，读数更为精确，减少了读数误差。
+   \item 惠斯登电桥允许通过调整标准电阻\(R_s\)来精确达到平衡状态，提高了测量的灵敏度和准确度。
+\end{enumerate}
+\subsubsection{用电桥法测电阻产生误差的主要因素}
+\begin{enumerate}
+   \item 标准电阻\(R_s\)的精度和稳定性不能保证，若其阻值有偏差，会直接影响测量结果。
+   \item 检流计灵敏度不足，导致平衡判断存在偏差。
+\end{enumerate}
+\subsection{为了提高电桥测量灵敏度，应采取哪些措施？为什么？}
+\begin{enumerate}
+  \item 提高电源电压。原因：电源电压升高会增大桥路电流，使电桥不平衡时检流计偏转幅度更明显，从而提高灵敏度（\(S = \frac{\Delta d}{\frac{\Delta R_s}{R_s}}\)）
+  \item 使比率臂\(\frac{R_1}{R_2}\)尽可能接近。原因：比率臂接近1时，电桥对电阻变化的灵敏度最高，微小的\(\Delta R_s\)会引发检流计明显偏转。
+\end{enumerate}
+\subsection{用电桥测电阻时，若线路接通后检流计指针总是往一个方向偏转或总不偏转，试分析是什么原因？}
+\subsubsection{检流计总往一个方向偏转}
+\begin{enumerate}
+   \item 比率臂\(\frac{R_1}{R_2}\)选择不合理，导致\(R_s\)的调节范围远小于（或远大于）\(R_x\)，电桥始终无法平衡。
+   \item 电路存在短路或断路。
+\end{enumerate}
+\subsubsection{检流计总不偏转}
+\begin{enumerate}
+   \item 检流计本身断路或被短路，无法检测电流。
+   \item 电源未接通，或桥路中某部分完全断路（如开关未闭合、电阻接线脱落）。
+\end{enumerate}
+\subsection{惠斯登电桥比率臂选取的原则是什么？为什么要这样选取？}
+\subsubsection{选取原则}
+\begin{enumerate}
+   \item 使比率臂\(\frac{R_1}{R_2}\)尽可能接近1。
+   \item 保证标准电阻\(R_s\)的调节能覆盖待测电阻\(R_x\)的范围。
+   \item 优先使用电阻箱的高位档位，使\(R_s\)有更多有效数字。
+\end{enumerate}
+
+\subsubsection{选取原因}
+比率臂接近1时，电桥灵敏度最高，测量误差最小；覆盖\(R_x\)范围可确保电桥能平衡；使用电阻箱高位档位能提高\(R_s\)的测量精度，从而提升\(R_x\)的计算精度。
+\subsection{如何使用自组电桥测量电表内阻（注意电表所能允许通过的最大电流）？根据电桥平衡的特点，可否将桥路中的检流计去掉，换成行测电表判别电桥的平衡？}
+\subsubsection{测量方法}
+\begin{enumerate}
+    \item 电路设计：将电流表作为\(R_x\)接入桥臂，串联保护电阻，计算：\(R_{\text{保}}\geq\frac{U}{I_{\text{max}}} - R_{\text{表估}}\)，U为电源电压，\(R_{\text{表估}}\)为电表内阻估计值），防止电流过大损坏电表。
+    \item 调节平衡：调节\(R_s\)和比率臂\(\frac{R_1}{R_2}\)，使检流计指零，此时\(R_x=\frac{R_1}{R_2} \cdot R_s\)。
+\end{enumerate}
+\subsubsection{能否替换检流计}
+理论上可将检流计替换为电压表（测桥路两端电压，电压为零时判断平衡）或电流表（测桥路电流，电流为零时判断平衡），但实际中：
+\begin{enumerate}
+   \item 电压表内阻并非无穷大，电流表内阻并非零，会改变桥路等效电阻，引入额外误差。
+   \item 电流表灵敏度通常低于检流计，难以精确判断平衡状态。
+\end{enumerate}
+因此，建议仍使用高灵敏度的检流计进行平衡判断，以确保测量精度。
+
+\end{fullreportonly}
+\insertnotes
+\end{document}
