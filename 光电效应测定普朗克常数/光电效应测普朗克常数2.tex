@@ -1,0 +1,481 @@
+\documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告
+\settemplatedir{../template/}%设置模板路径
+
+% 等宽表格支持
+\usepackage{tabularx}
+\usepackage{array}
+
+% 固定长度下划线并可在其上方居中填字：\fillblank[宽度]{内容}
+% 例：\textbf{光源距离:}\,\fillblank[1.5cm]{400}\,cm
+% 若留空：\fillblank[1.5cm]{}
+\newcommand{\fillblank}[2][1.8cm]{%
+    \makebox[#1]{\hrulefill}% 画固定长度横线
+    \hspace{-#1}\makebox[#1][c]{#2}% 居中覆盖文字
+}
+
+\exname{光电效应测定普朗克常数} %实验名称
+\extable{8} %实验桌号
+\instructor{韩益航} %指导教师
+\class{信工2401} %班级
+\name{姚舜瑜} %姓名
+\stuid{3240100532} %学号
+
+\nyear{2025} %年
+\nmonth{10} %月
+\nday{28} %日
+\nweekday{二} %星期几，e.g. \nweekday{三}
+\daypart{上午}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+
+\begin{document}
+\maketitle%输出封面
+
+\section{预习报告（10分）}
+
+\subsection{实验综述（5分）}
+\subsubsection{实验目的}
+本实验目的在于帮助我们理解光电效应方程和光量子概念，掌握光电效应的实验方法，并验证亲自实验现象，最终通过一定的数据处理测定普朗克常数。
+\subsubsection{实验原理}
+\begin{enumerate}[label=(\arabic*)]
+\item \textbf{光电效应与基本规律}
+
+光电效应是指光照射到金属表面时，能够使金属表面逸出电子的现象。其基本规律遵循爱因斯坦光电效应方程：
+\begin{equation}
+    h\nu = W + \frac{1}{2}mv^2_{\max} ,
+\end{equation}
+其中，左侧的$h\nu$ 表示入射光子的能量，右侧的 $W$ 为金属的逸出功，$\frac{1}{2}mv^2_{\max}$ 为逸出电子的最大动能。这一方程揭示了光电效应的两大基本特性：
+\begin{enumerate}[label=(\roman*)]
+    \item 光电子的动能与入射光的频率有关，而与光强无关。
+    \item 存在一个最小频率（红限频率），低于该频率光无法使金属表面逸出电子。
+\end{enumerate}
+而正是根据这一方程，我们得以使用光电效应实验来测定普朗克常数 $h$。
+
+\item \textbf{实验仪器原理}
+
+本实验采用“减速电位法”测量光电子的最大初动能。仪器原理如\cref{guangdian}所示。其中GD是光电管，A为阳极，K为阴极。
+G为微电流计，V为电压表，E为电源。根据电路原理，调节滑动变阻器R，可使光电管两端加速电位差$U_{AK}$从$-U$到$+U$连续变化。
+实验所用单色光是从低压汞灯光谱中用干涉滤色片过滤得到，波长各不相同。
+
+光照射阴极时，根据光电效应，阴极释放电子产生阴极电流，$U_{AK}$越大，阴极电流越大，直到达到某一饱和值$I_H$，称为饱和光电流。$I_H$大小和光强成正比。
+$U_{AK}$变为负值时，阴极电流迅速减小，直到$U_{AK}$减小到某一负值$U_a$时，阴极电流变为0。
+$U_a$称为遏止电位差。$\left|U_a\right|$的大小和光强无关，而是随着照射光频率的增大而增大。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.32\textwidth]{guangdian.png}
+    \caption{实验原理图}
+    \label{guangdian}
+\end{figure}
+
+\item \textbf{截止电压与频率的线性关系}
+
+在光电管中令阳极$A$相对阴极$K$带适当\textbf{反向电压}，调节至光电流降至零（“\textbf{截止}”），此时反向电场恰好阻止最“快”的光电子到达阳极。
+于是根据爱因斯坦光电效应方程，有
+\begin{equation}
+    e\,U_a = h\nu - W \quad (U_a\ge 0) ,
+\end{equation}
+等价地写成线性关系
+\begin{equation}
+    \boxed{\ U_a(\nu) = \frac{h}{e}\,\nu - \frac{W}{e}\ } .
+\end{equation}
+因此：
+\begin{itemize}
+    \item 斜率 $\mathrm{k}=h/e$，由\textbf{线性拟合} $U_a$–$\nu$ 的斜率即可求得
+    \begin{equation}
+        \boxed{\ h = e\,\mathrm{k}\ } ;
+    \end{equation}
+    \item 截距 $\mathrm{b}=-W/e$，可反推\textbf{逸出功}
+    \begin{equation}
+        \boxed{\ W = -e\,\mathrm{b}\ } ;
+    \end{equation}
+    \item 当 $U_a=0$ 时得到\textbf{红限频率}
+    \begin{equation}
+        \boxed{\ \nu_0 = \frac{W}{h}\ } .
+    \end{equation}
+\end{itemize}
+提高光强\,I\,只会增加\textbf{饱和光电流} $i_s$（单位时间被照逸出的电子数增多），但\textbf{截止电压 $U_a$ 与光强无关}。
+改变光的\textbf{频率}会\textbf{平移} I–U 曲线的截止点，频率越高，$U_a$ 越大。
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}cc@{}}
+        \begin{minipage}[t]{0.27\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{频率-电压.png}\\[4pt]
+            \footnotesize 截止电压与频率的关系示意图
+        \end{minipage}
+        &
+        \begin{minipage}[t]{0.42\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{电压-电流.png}\\[4pt]
+            \footnotesize 不同频率与光强下的I–U 曲线示意图
+        \end{minipage}
+    \end{tabular}
+    \caption{光电效应基本关系示意图}
+    \label{fig:photoelectric_overview}
+\end{table}
+
+
+    \begin{enumerate}[label=\arabic*)]
+        \item 将所有器件（汞灯、聚光/滤光组件等）依次安装在光具座上，调好光轴同心度；重点\textbf{将汞灯出射光聚焦到光电管的正中心}。
+        \item 按原理图完成\textbf{放大电路板}的连接，并在\textbf{其输出端接上测量用电压表}；核对接地与极性，开启设备预热约 \SI{20}{min}。
+    \end{enumerate}
+    \item \textbf{截止电压的测量（零电流法）}
+    \begin{enumerate}[label=\arabic*)]
+        \item 打开电压表，将\textbf{量程置于 -4.5-2.5 V 档}；旋转光孔转盘，使\textbf{黄光}（$\lambda=\SI{577}{nm}$）滤光片置于光路上。
+        \item 按下电容旁\textbf{放电开关}，直至电表读数为零（记录零点）；\textbf{释放放电开关}，等待约 \SI{1}{min} 直到电表指针停止，记录此时读数为该波长的\textbf{截止电压} $U_a$。
+        \item 以相同步骤完成其余各波长的截止电压的测量（量程保持 -4.5-2.5 V）。
+        \item 用公式 $\nu=c/\lambda$ 计算各波长对应的频率；在 MATLAB 中将频率与电压作图（$U_a$–$\nu$ 直线），其斜率即为 $h/e$，从而求得 $h$。
+    \end{enumerate}
+    \item \textbf{伏安特性曲线的测量}
+    \begin{enumerate}[label=\arabic*)]
+        \item 把电压表挡位调整到 \textbf{-4.5-30 V 档位}，选择合适的光阑孔径和距离。
+        \item 从小往大调整电压，记录不同电压下的电流值，绘制 $I$–$U$ 曲线；
+    \end{enumerate}
+    \item \textbf{拓展实验}
+    \begin{enumerate}[label=\arabic*)]
+        \item 在单色光下，改变光源距离或光阑孔径，测量饱和光电流 $I_s$ 的变化并验证比例关系。
+    \end{enumerate}
+\end{enumerate}
+
+\subsubsection{数据处理与分析流程}
+本实验的数据处理围绕三个目标展开：
+\begin{enumerate}[label=(\roman*)]
+    \item 线性拟合截止电压–频率：将测得的波长换算为频率 $\nu=c/\lambda$，对 $U_a(\nu)=\tfrac{h}{e}\nu-\tfrac{W}{e}$ 做最小二乘直线拟合，取斜率 $k$ 与截距 $b$，计算 $h=e\,k$、$W=-e\,b$；由回归协方差给出两者的标准偏差与合成不确定度，与公认值 $h_0$ 比较并给出相对偏差；由 $\nu_0=W/h$ 得红限频率及不确定度。
+    \item 绘制伏安特性：对每种单色光的电压–电流数据绘制 $I$–$U$ 曲线，标注截止点与饱和区，比较不同频率下曲线的平移与饱和电流变化。
+    \item 验证饱和电流与光强成正比：以光强（或光源距离、光阑孔径等）为自变量、饱和电流 $I_s$ 为因变量，分别进行带截距与过原点的线性回归，来验证是否成正比。
+\end{enumerate}
+上述处理可用 MATLAB 等软件实现；并可同时导出 $R^2$，用于量化拟合质量与评估不确定度来源。
+
+
+
+\subsection{实验重点}
+\begin{enumerate}
+    \item 掌握光电效应测普朗克常量的原理；
+    \item 学习光电效应测普朗克常量仪器的使用方法；
+    \item 掌握用Matlab等软件处理数据、绘制图像、计算不确定度的方法。
+\end{enumerate}
+
+\subsection{实验难点}
+\begin{enumerate}
+    \item 首次使用相关仪器，使用可能不熟练不正确；
+    \item 学习掌握相关数据处理软件的计算方法；
+    \item 实验仪器可能存在误差，如存在阳极光电流，对遏止电压测量产生影响。
+\end{enumerate}
+
+\begin{fullreportonly}
+\section{原始数据（20分）}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/pic1.jpg}
+    \caption{实验原始数据记录照片 1}
+    \label{fig:data_photoelectric_1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/pic2.jpg}
+    \caption{实验原始数据记录照片 2}
+    \label{fig:data_photoelectric_2}
+\end{figure}
+
+\section{结果与分析（60分）}
+\subsection{数据处理与结果（30分）}
+
+\subsubsection{实验一：截止电压与波长的关系}
+\begin{enumerate}[label=(\arabic*)]
+    \item \textbf{截止电压与波长记录表}
+    
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \setlength{\tabcolsep}{8pt}
+    \begin{tabularx}{\textwidth}{|l|*{5}{>{\centering\arraybackslash}X|}}
+        \hline
+        \multicolumn{6}{|l|}{\textbf{光阑孔径:}\,\fillblank[1.5cm]{$\phi 4$}\,mm\quad\textbf{光源距离:}\,\fillblank[1.5cm]{400}\,mm} \\
+        \hline
+        	\textbf{滤光片波长 $\lambda$ (nm)} & 365 & 405 & 436 & 546 & 577 \\
+        \hline
+        	\textbf{截止电压 $U_a$ (V)} &-1.689&-1.343 &-1.134 &-0.595 &-0.480  \\
+        \hline
+    \end{tabularx}
+    \caption{不同波长下的截止电压记录}
+    \label{tab:Ua_lambda_1}
+\end{table}
+\item \textbf{数据拟合求普朗克常量}
+
+由公式 $U_a(\nu)=\frac{h}{e}\nu - \frac{W}{e}$ 可知，截止电压 $U_a$ 与频率 $\nu$ 呈线性关系。将表格中的波长换算为频率 $\nu=c/\lambda$，并对 $U_a$–$\nu$ 进行最小二乘直线拟合，得到斜率 $k$ 与截距 $b$。
+通过斜率计算普朗克常量$h = e\,k$
+
+使用 MATLAB 以 $x=1/\lambda$ 为自变量进行线性拟合 $U=a\,x+b$，得到 $a=1.1932\times 10^{-6}\,\mathrm{V\cdot m}$、$b=-1.5928\,\mathrm{V}$、$R^2=0.9996$。由此计算
+\begin{equation}
+    \boxed{h=\frac{a\,e}{c}=6.3768\times 10^{-34}\,\mathrm{J\cdot s}}
+\end{equation}
+
+同时可以计算出逸出功和红限频率：
+\begin{equation}
+    W=-e\,b=2.5555\times 10^{-19}\,\mathrm{J}=1.5953\,\mathrm{eV}; \quad
+    \nu_0=\frac{W}{h}=4.0085\times 10^{14}\,\mathrm{Hz}
+\end{equation}
+
+
+拟合图见\cref{fig:Ua_invLambda_fit}。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.53\textwidth]{figures/Ua_invLambda_fit.png}
+    \caption{$U_a$ 对 $1/\lambda$ 的线性拟合，斜率 $a$ 与截距 $b$ 由最小二乘得到}
+    \label{fig:Ua_invLambda_fit}
+\end{figure}
+
+\end{enumerate}
+\subsubsection{实验二：伏安特性曲线测量}
+\begin{enumerate}[label=(\arabic*)]
+
+\item \textbf{伏安特性曲线数据表}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabularx}{\textwidth}{|l|*{10}{>{\centering\arraybackslash}X|}}
+        \hline
+        \multicolumn{11}{|l|}{\textbf{光阑孔径:}\,\fillblank[1.5cm]{$\phi 8$}\,mm\quad\textbf{光源距离:}\,\fillblank[1.5cm]{400}\,mm\quad\textbf{滤光片波长:}\,\fillblank[1.5cm]{365}\,nm} \\
+        \hline
+    	\textbf{光电管电压 $U_{AK}$ (V)} & -1.49&-1.00 &-0.70 &-0.40 &0.00 &0.20 &0.30 &0.50 &0.75 &1.50\\
+        \hline
+    	\textbf{电流 $i$ ($\times 10^{-10}$A)} &0 &1 &3 &5 &8 &13 &15 &18 &22 &25 \\
+        \hline
+    	\textbf{光电管电压 $U_{AK}$ (V)} & 2.00&3.00 &4.00 &5.00 &6.00 &7.00 &8.00 &9.00 &10.00 &11.00 \\
+        \hline
+    	\textbf{电流 $i$ ($\times 10^{-10}$A)} &33 &45 &53 &69 &85 &103 &120 &138 &156 &176\\
+        \hline
+    	\textbf{光电管电压 $U_{AK}$ (V)} &12.00 &14.00 &16.00 &18.00 &20.00 &22.00 &24.00 &26.00 &28.00 &30.00 \\
+        \hline
+    	\textbf{电流 $i$ ($\times 10^{-10}$A)} &193 &234 &272 &304 &336 &370 &398 &416 &430 &441\\
+        \hline
+    \end{tabularx}
+    \caption{I–U 原始数据记录表}
+    \label{tab:IU_B}
+\end{table}
+
+\item \textbf{伏安特性曲线绘制与分析}
+
+利用Matlab软件处理数据，描点得到伏安特性曲线如\cref{fig:IU_curve} 所示。可以看出，随着电压的增加，电流逐渐增大，并趋于饱和。
+
+在本实验中最后电流未明显饱和的原因是电压即使已达到量程最大的30 V，但光强较大，电子数仍在增加，未达到完全饱和状态。如若继续增大电压，电流将趋于饱和。
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{figures/IU_curve.png}
+        \caption{伏安特性曲线}
+        \label{fig:IU_curve}
+\end{figure}
+
+\end{enumerate}
+\subsubsection{实验三：饱和电流与光强的关系}
+\begin{enumerate}[label=(\arabic*)]
+
+% 饱和电流与孔径（模板 E）
+\item \textbf{饱和电流与光阑孔径数据表}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabularx}{\textwidth}{|l|*{3}{>{\centering\arraybackslash}X|}}
+        \hline
+        \multicolumn{4}{|l|}{\textbf{光源距离:}\,\fillblank[1.8cm]{400}\,mm\quad\textbf{滤光片波长:}\,\fillblank[1.8cm]{365}\,nm} \\
+        \hline
+        	\textbf{光阑孔径 $\Phi$ (mm)} & 2 & 4 & 8 \\
+        \hline
+        	\textbf{饱和电流 $i_s$ ($10^{-10}$A)} &40 &138 &445 \\
+        \hline
+    \end{tabularx}
+    \caption{在固定光源距离与波长下测量不同孔径的饱和电流}
+    \label{tab:Is_vs_aperture}
+\end{table}
+
+\item \textbf{线性拟合与理论分析}
+
+对 $I$–$\phi^2$ 进行线性拟合 $I=a\,\phi^2+b$（单位：$10^{-10}\,\mathrm{A}$ 与 $\mathrm{mm}^2$），得到近似结果 $a\approx 6.649$（每 $\mathrm{mm}^2$）、$b\approx 21.5$，$R^2=0.99807$。
+结果表明 $I_s$ 与孔径面积的平方线性拟合程度较好，几乎近似成正比，截距接近于 0。
+
+经过查阅资料我们得知，在入射光频率大于截止频率的前提下，饱和光电流与入射光的强度成正比。我们把光的强度定义为通过单位面积的光功率。当一束平行光垂直照射时，其总功率为：
+\begin{equation}
+    P=I_0\,S ,
+\end{equation}
+其中$I_0$为光强，$S$为光斑面积。而光斑面积与光阑孔径的平方成正比，因此饱和电流与孔径平方成正比符合理论预期。
+
+拟合图见\cref{fig:Is_vs_phi2_aperture}。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/Is_vs_phi2.png}
+    \caption{饱和电流 $I_s$ 相对于孔径平方 $\phi^2$ 的线性拟合}
+    \label{fig:Is_vs_phi2_aperture}
+\end{figure}
+
+\end{enumerate}
+\subsubsection{实验四：饱和电流与光源距离的关系}
+\begin{enumerate}[label=(\arabic*)]
+% 饱和电流与光源距离（模板 F）
+\item \textbf{饱和电流与光源距离}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabularx}{\textwidth}{|l|*{6}{>{\centering\arraybackslash}X|}}
+        \hline
+        \multicolumn{7}{|l|}{\textbf{光阑孔径:}\,\fillblank[1.8cm]{$\phi 4$}\,mm\quad\textbf{滤光片波长:}\,\fillblank[1.8cm]{365}\,nm} \\
+        \hline
+        	\textbf{光源距离 $L$ (mm)} &400 &380 &370 &350 & 330&300\\
+        \hline
+        	\textbf{饱和电流 $i_s$ ($10^{-10}$A)} &138 &154 &163 &187 &215 &266\\
+        \hline
+    \end{tabularx}
+    \caption{在固定孔径与波长下测量不同光源距离的饱和电流}
+    \label{tab:Is_vs_distance}
+\end{table}
+
+\item \textbf{线性拟合与理论分析}
+
+对 $I$–$L^2$ 进行线性拟合 $I=c\,L^2+d$（单位：$10^{-10}\,\mathrm{A}$ 与 $\mathrm{mm}^2$），得到近似结果 $c\approx -1.827\times 10^{-3}$（每 $\mathrm{mm}^2$）、$d\approx 419.4$，$R^2=0.9652$。
+可以看出，数据线性拟合程度较高。斜率为负，表示随距离增大（$L^2$ 变大）饱和电流减小，趋势与\textbf{反平方定律}一致。
+
+根据查询资料我们知道，光源发出的光在空间中均匀向各个方向传播，导致同一时间的光功率被分散到整个球面。而球面表面积公式为 $S=4\pi L^2$，因此可知光强与距离的平方成反比，即：
+\begin{equation}
+    I_0 \propto \frac{1}{L^2} .
+\end{equation}
+而饱和光电流与入射光强成正比，因此饱和电流与距离的平方成反比。拟合结果符合理论预期。
+
+拟合图见\cref{fig:Is_vs_L2}。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/Is_vs_L2.png}
+    \caption{饱和电流 $I_s$ 相对于距离平方 $L^2$ 的线性拟合}
+    \label{fig:Is_vs_L2}
+\end{figure}
+\end{enumerate}
+
+\subsection{误差分析（20分）}
+
+\subsubsection{相对误差分析}
+采用 $U=a\,x+b$（$x=1/\lambda$）的线性回归得到 $a=1.1932\times 10^{-6}\,\mathrm{V\cdot m}$、$b=-1.5928\,\mathrm{V}$，据此计算
+$h=\frac{a\,e}{c}=6.3768\times 10^{-34}\,\mathrm{J\cdot s}$
+
+该计算值与公认值 $h_0=6.626\times 10^{-34}\,\mathrm{J\cdot s}$ 相比，相对偏差为：
+\begin{equation}
+    \frac{h-h_0}{h_0}\approx -3.72\% .
+\end{equation}
+
+可以看出，该相对误差较小，说明实验结果较为准确。
+
+\subsubsection{不确定度分析}
+采用模型 $U=m\,\nu+b$ 做最小二乘回归，得到参数的标准不确定度与协方差为：
+\[
+    m = -3.980074\times 10^{-15}\,\mathrm{V\cdot s},\quad u(m)=4.510980\times 10^{-17}\,\mathrm{V\cdot s},\\
+\]
+\[
+    b = -1.5928\,\mathrm{V},\quad u(b)=0.0212\,\mathrm{V};\\
+\]
+\[
+    \mathrm{cov}(m,b) = -8.106218\times 10^{-19}\,\mathrm{V^2\cdot s} .
+\]
+
+由回归参数求物理量并传播不确定度（仅报告标准不确定度 $u$）：
+\[
+    h=-e\,m,\quad u(h)=e\,u(m).
+\]
+\[
+    W=-e\,b,\quad u(W)=e\,u(b).
+\]
+\[
+    \nu_0=\frac{W}{h},\quad u(\nu_0)=\nu_0\sqrt{\left(\frac{u(W)}{W}\right)^2+\left(\frac{u(h)}{h}\right)^2-2\frac{\mathrm{cov}(m,b)}{m\,b}} .
+\]
+代入本实验的拟合结果，得到数值：
+\[
+    \hat h=6.376782\times 10^{-34}\,\mathrm{J\cdot s},\quad u(h)=7.227387\times 10^{-36}\,\mathrm{J\cdot s};\\
+\]
+\[
+    \hat W=2.5555\times 10^{-19}\,\mathrm{J},\quad u(W)=3.3956\times 10^{-21}\,\mathrm{J};\\
+\]
+\[
+    \hat \nu_0=4.0085\times 10^{14}\,\mathrm{Hz},\quad u(\nu_0)=5.5151\times 10^{12}\,\mathrm{Hz} .
+\]
+因此我们可以计算得到各个物理量的相对不确定度为：
+\[
+    \frac{u(h)}{\hat h}\approx 1.134\times 10^{-2} ;\quad
+    \frac{u(W)}{\hat W}\approx 1.328\times 10^{-2} ;\quad
+    \frac{u(\nu_0)}{\hat \nu_0}\approx 1.376\times 10^{-2} .
+\]
+
+综上所述，各物理量可最终写作：
+\begin{equation}
+    \boxed{h=(6.38 \pm 0.07)\times 10^{-34}\,\mathrm{J\cdot s}} .
+\end{equation}
+\begin{equation}
+    \boxed{W=(2.56 \pm 0.03)\times 10^{-19}\,\mathrm{J}} .
+\end{equation}
+\begin{equation}
+    \boxed{\nu_0=(4.01 \pm 0.06)\times 10^{14}\,\mathrm{Hz}} .
+\end{equation}
+
+\subsection{实验探讨（10分）}
+本次实验通过测量光电管的截止电压与入射光频率的关系，成功地验证了光电效应的基本原理，并精确测定了普朗克常数。在理论层次中，我们通过爱因斯坦光电效应方程，理解了光的粒子性以及光量子的概念，并懂得了光电效应的基本规律。
+在实验操作方面，我们掌握了光电效应测普朗克常量仪器的使用方法，包括光源的调节、滤光片的选择以及电压和电流的测量等。通过数据处理，我们学会了如何利用线性拟合方法来分析实验数据，并从中提取出普朗克常数和逸出功等重要物理量。
+此外，我们还探讨了实验中可能存在的误差来源，并提出了相应的改进措施，以提高实验的准确性和可靠性。
+
+\section{思考题（10分）}
+\subsection{测定普朗克常数的关键是什么？怎样根据光电管的特性曲线选择适宜的测定遏止电压$U_a$的方法？}
+
+关键是精确测出每个频率的光对应的遏止电压。这样就能从$U_a \sim \nu$拟合直线的斜率中计算得普朗克常数，并且可靠程度较高。
+
+分别测定光电管的正向电流和反向电流，根据这两条电流特性曲线的特点选择不同方法确定$U_a$。
+\begin{enumerate}
+    \item 若光电流特性曲线的正向电流上升得很快，反向电流很小，则可以用光电流特性曲线与暗电流特性曲线交点的电位差$U_a'$作为截止电位差$U_a$（交点法）。
+    \item 若反向特性曲线的反向电流虽然较大，但饱和速度很快，则可以用反向电流开始饱和时的拐点电位差$U_a''$当做截止电位差$U_a$（拐点法）。
+\end{enumerate}
+
+\subsection{从遏止电压$U_a$与入射光的频率$\nu$的关系曲线中，你能确定阴极材料的逸出功吗？}
+可以。由$U_a = \frac{h}{e} \nu - \frac{W}{e}$，我们知道$U_a \sim \nu$图线的纵截距$b = - \frac{W}{e}$，从而逸出功为：
+\begin{equation}
+    W = -be
+\end{equation}
+
+在报告中已经计算出逸出功为$W=2.56 \times 10^{-19}\,\mathrm{J}$。
+
+\subsection{本次实验存在哪些误差来源？实验中如何解决这些问题？}
+\begin{enumerate}
+    \item \textbf{电流计分度值较大，不够精确，无法准确判定光电流恰为0的点}
+    
+    【解决方法】对同一频率光的遏止电压，可以多次测量；也可选择换用更精确的电流计；
+    \item \textbf{只有5个波长的滤光片，数据较少}
+    
+    【解决方法】可换用更多其他波长的滤光片，从而使拟合结果更接近实际；
+    \item \textbf{光电管不理想，存在反向电流}
+
+    【解决方法】采用上述的交点法或拐点法，以修正阳极电流的影响；
+    \item \textbf{电流计读数不稳定}
+
+    【解决方法】应对汞灯和仪器充分预热，保证汞灯发出的光强稳定；
+    \item \textbf{后两部分实验记录数据较小，不能精确描绘或拟合曲线}
+
+    【解决方法】多次均匀取点并作图，作图时注意去除异常数据；
+    \item \textbf{标尺上$L$的分度值较大，无法精确测量距离}
+    
+    【解决方法】每次将阴极置于标尺刻度线处，或选择分度值更小的标尺。
+    \item \textbf{杂散光影响}
+    
+    【解决方法】遮光筒与黑布全光路遮光；测量背景并做扣除。
+    \item \textbf{光路未准直、光斑未居中或入射角偏离}
+    
+    【解决方法】用对准卡调同轴与聚焦，使光斑落在阴极有效区中心；固定支架，减少震动与位移。
+
+\end{enumerate}
+
+
+\end{fullreportonly}
+\insertnotes
+\end{document}
