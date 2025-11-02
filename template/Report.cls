@@ -26,6 +26,7 @@
 \crefname{figure}{图}{图}
 \crefname{table}{表}{表}
 \crefname{equation}{式}{式}
+% \crefmultiformat{figure}{图~#1}{ 和~#1}{、#1}{ 和~#1}
 
 % 更复杂的格式，例如想让引用显示为 “图 1-1”
 % #1 是标签名, #2 是数字, #3 是备注

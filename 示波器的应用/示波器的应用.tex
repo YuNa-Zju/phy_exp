@@ -1,0 +1,313 @@
+\documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\settemplatedir{../template/}%设置模板路径
+
+\exname{示波器的应用} %实验名称
+\extable{} %实验桌号
+\instructor{} %指导教师
+\class{} %班级
+\name{} %姓名
+\stuid{} %学号
+
+\nyear{} %年
+\nmonth{} %月
+\nday{} %日
+\nweekday{} %星期几，e.g. \nweekday{三}
+\daypart{}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+
+\begin{document}
+\maketitle%输出封面
+
+\section{预习报告（10分）}
+上课前到学在浙大上完成，注意测试仅1次机会。期末时测试分数会与报告其他部分的分数进行加和处理。
+
+\section{原始数据（20分）}
+（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+
+\section{结果与分析（60分）}
+\subsection{数据处理与结果（30分）}
+（列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+\subsubsection{用比较法验证$f_y = n \cdot f_x$}
+\begin{table}[H]
+\centering
+\caption{比较法测量扫描信号频率}
+\label{tab:freq}
+\begin{tabular}{|l|l|l|}
+\hline
+波形个数$n$ & 信号频率$f_y$(\si{\hertz}) & 测得的扫描信号频率$f_x$(\si{\hertz}) \\ \hline
+1       & 195.800                & 195.800        \\ \hline
+2       & 391.200                & 195.600        \\ \hline
+3       & 586.800                & 195.600        \\ \hline
+4       & 783.600                & 195.900        \\ \hline
+5       & 979.300                & 195.860        \\ \hline
+6       & 1174.310               & 195.718        \\ \hline
+\end{tabular}
+\end{table}
+平均值
+\[
+\bar{f} = \frac{f_1 + f_2 + \cdots + f_5 + f_6}{6} = \SI{195.746}{\hertz}
+\]
+
+扫描时基信号为0.5 \si{\ms \per dit}，即$f_x = \SI{200}{\hertz}$
+
+相对误差
+\[
+E = \frac{\left|f_\text{实} - f_\text{理}\right|}{f_\text{理}} = 2.1\%
+\]
+
+计算A类不确定度
+\[
+u_A = \sqrt{\frac{\sum_{i = 1}^{6}(\bar{f} - f_i)^2}{6 \times 5}} = \SI{0.053}{\hertz}
+\]
+
+最终结果
+\[
+f = \SI{195.746(0.053)}{\hertz}
+\]
+\subsubsection{用李萨如图形测量未知信号的频率}
+信号发生器背后输出的~50Hz的电压，作为$f_y$
+\begin{table}[H]
+\centering
+\caption{李萨如图形测量未知信号频率}
+\label{tab:li_freq}
+\begin{tabular}{|L{0.2\textwidth}|L{0.08\textwidth}|L{0.08\textwidth}|L{0.08\textwidth}|L{0.08\textwidth}|L{0.08\textwidth}|L{0.08\textwidth}|}
+\hline
+频率比$f_y:f_x$ & 1:3     & 1:2     & 2:3    & 1:1    & 3:2    & 2:1    \\ \hline
+图形           & 见\cref{pic:1:3}       & 见\cref{pic:1:2}       & 见\cref{pic:2:3}      & 见\cref{pic:1:1}      & 见\cref{pic:3:2}      & 见\cref{pic:2:1}      \\ \hline
+垂直交点数$N_y$   & 6       & 4       & 6      & 2      & 4      & 4      \\ \hline
+水平交点数$N_x$   & 2       & 2       & 4      & 2      & 6      & 2      \\ \hline
+读出$f_x$(\si{\hertz})      & 150.108 & 100.069 & 75.052 & 49.967 & 33.370 & 25.010 \\ \hline
+计算$f_y$(\si{\hertz})      & 50.036  & 50.034  & 50.035 & 49.967 & 50.055 & 50.020 \\ \hline
+\end{tabular}
+\end{table}
+平均值
+\[
+\bar{f_y} = \frac{\sum_{i = 1}^{6}f_{yi}}{6} = \SI{50.024}{\hertz}
+\]
+相对误差
+\[
+E = \frac{\left|f_\text{实} - f_\text{理}\right|}{f_\text{理}} = 0.048\%
+\]
+计算A类不确定度
+\[
+u_A = \sqrt{\frac{\sum_{i = 1}^{6}(\bar{f} - f_i)^2}{6 \times 5}} = \SI{0.012}{\hertz}
+\]
+最终结果
+\[
+f_y = \SI{50.024(0.012)}{\hertz}
+\]
+
+\subsubsection{测量二极管正向导通电压}
+光标法测量结果（见\cref{pic:pp,pic:p}）
+\begin{table}[H]
+\centering
+\caption{二极管导通压降}
+\label{tab:di}
+\begin{tabular}{|L{0.4\textwidth}|C{.2\textwidth}|}
+\hline
+项目                     & 测量得到的值(\si{\volt }) \\ \hline
+输入电压的峰-峰值$U_{1P-P}$    & 9.76               \\ \hline
+输出半波电压的峰值$U_{2P}$      & 4.08               \\ \hline
+二极管导通的电压降$U_\text{导通}$ & 0.80               \\ \hline
+\end{tabular}
+\end{table}
+\subsubsection{测量RC电路相位差}
+光标法测量结果（见\cref{pic:T,pic:phi}）
+\begin{table}[H]
+\centering
+\caption{测量RC电路相位差}
+\label{tab:phi}
+\begin{tabular}{|l|l|l|}
+\hline
+波形时间差$\Delta T$(\si{\milli\second}) & 周期$T$(\si{\milli\second}) & 相位差$\Delta \varphi$ \\ \hline
+0.184                     & 1.000         & \ang{66.24}               \\ \hline
+\end{tabular}
+\end{table}
+\subsection{误差分析（20分）}
+（运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+
+本次实验总体上是成功的，通过数据处理可见，测量结果（如李萨如图形法测频率，相对误差仅为 \SI{0.048}{\percent}）与理论值符合得很好，实验数据较为理想。
+
+尽管如此，实验过程中仍存在一些不可避免的误差来源，主要可归纳为以下几点：
+
+\begin{enumerate}
+    \item \textbf{仪器误差（系统误差）}
+
+    这是本次实验最主要的误差来源之一，主要体现在信号发生器上：
+
+    \begin{itemize}
+        \item \textbf{频率设置值与实际值不符：} 信号发生器的显示设置值与其实际输出的频率存在误差差。
+
+        \item 在实验一中，扫描时基的理论值 $f_x$ 应为 \SI{200}{\hertz}，但六次测量的平均值为 $\bar{f} = \SI{195.746}{\hertz}$，产生了 \SI{2.1}{\percent} 的相对误差。
+
+        \item 在实验四（李萨如图形）中，也观察到需要微调 $f_x$ 的示数才能使图形稳定，说明仪器的实际频率与示数值存在偏差。
+
+        \item \textbf{信号发生器的不稳定性：} 在实验四中，信号发生器的输出频率存在小幅漂移。有时调节到近乎稳定的状态后，数秒后图形又会开始翻转，这给精确测量带来了困难。
+    \end{itemize}
+
+    \item \textbf{观测与读数误差}
+
+    \begin{itemize}
+        \item \textbf{波形线具有宽度：} 示波器显示的波形具有一定宽度，并非理想的细线。在进行测量时（如实验三、五、六中利用光标法测量电压、周期或相位差），光标的对准和波峰的判断会受到辉线宽度的影响，导致读数存在主观性和不确定性。
+
+        \item \textbf{波峰对齐困难：} 在测量周期或频率时，如实验三中，需要将波峰精确对准屏幕的特定竖直刻度线，这个对齐过程存在视觉误差，尤其是在波形较宽时，难以精确找到峰值点，从而给 $f_y$ 的测量带来误差。
+    \end{itemize}
+
+    \item \textbf{示波器本身的校准误差}
+
+    示波器内部的时基（如 \SI{0.5}{\ms\per div}）和垂直灵敏度（\si{\volt\per div}）也可能存在微小的校准偏差，这会引入系统误差。但从本次实验极低的相对误差来看，所用仪器的校准情况良好，此项误差影响较小。
+
+    \item \textbf{结论}
+
+    综上所述，本次实验的误差主要来源于信号发生器的频率偏差和读数时的视觉误差。通过多次测量取平均值（和使用精确的光标法，可以有效地减小读数误差的影响，使测量结果达到了较高的准确度。
+
+\subsection{实验探讨（10分）}
+（对实验内容、现象和过程的小结，不超过100字。）
+
+本次实验内容虽简，但我对示波器的功能及实现原理有了更深理解。我从基本操作入手，重点掌握了光标法与触发功能的使用，并成功测量了多种以往难以测定的物理量。这次实验让我对仪器的掌握更加深入，受益匪浅。
+\section{思考题（10分）}
+（解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+
+\subsection{示波器为什么能显示被测信号的波形}
+电子先是通过加速电场进入轴线。
+\subsubsection{垂直偏转}
+\begin{itemize}
+    \item \textbf{施加电压：} 将被测信号 $u(t)$ 作为 Y 轴偏转电压 $u_Y$，即 $u_Y = u(t)$。
+    \item \textbf{偏转公式：} 电子在偏转电场中受力，飞出电场后打在荧光屏上。其最终的垂直偏转位移 $y$ 与偏转电压 $u_Y$ 成正比：
+    \[ y = \frac{L l_y}{2 d_y U_a} u_Y \]
+    其中，$L$ 为偏转板到荧光屏的有效距离，$l_y$ 和 $d_y$ 分别是 Y 轴偏转板的长度和间距，$U_a$ 是加速电压。
+    \item \textbf{定量关系：} 对于一台固定的示波器，$\frac{L l_y}{2 d_y U_a}$ 是一个常数\\
+    因此 $y \propto u$。
+\end{itemize}
+
+\subsubsection*{2. 水平偏转（X 轴）}
+
+电子束同时也会经过 X 轴偏转极板。
+
+\begin{itemize}
+    \item \textbf{施加电压：} 施加一个周期性的锯齿波“扫描电压” $u_X(t)$。在扫描周期 $T_x$ 内，该电压随时间线性增长，即 $u_X(t) = k t$（$k$ 为常数）。
+    \item \textbf{偏转公式：} 同理，水平偏转位移 $x$ 与 $u_X$ 成正比：
+    \[ x = \frac{L l_x}{2 d_x U_a} u_X \]
+    \item \textbf{定量关系：} $\frac{L l_x}{2 d_x U_a}$ 也和示波器本身有关，是一个常数。\\
+    这实现了 $x \propto t$ 的正比关系。
+\end{itemize}
+
+示波器通过施加锯齿电压，将电信号 $(t, u(t))$ 上的点，一一映射为荧光屏上的坐标点 $(x, y)$：
+\begin{itemize}
+    \item $x = k_1 \cdot t$
+    \item $y = k_2 \cdot u(t)$
+\end{itemize}
+这样，电子束在屏幕上扫过的轨迹 $y(x)$，就精确地复现了被测信号 $u(t)$ 的波形。
+
+当扫描电压的周期 $T_x$ 恰好是信号周期 $T_y$ 的整数倍（即 $T_x = nT_y$）时，后续扫描的波形会与前一次的轨迹完全重合，我们就能观察到清晰、稳定的波形。
+
+但如果其中有相位差，那么波形可能会左右移动。
+\subsection{在观察李萨如图形时为什么总是不断地来回翻转，反转快慢受哪些因素影响}
+\paragraph{翻转的原因}两个信号的频率并不是严格的整数比，可能有一定的相位差，所以不能形成稳定的李萨如图形，导致李萨如图形不停翻转变化。
+\paragraph{翻转快慢的因素}翻转快慢就是相位差改变的快慢，这与两个信号频率的整数倍之间的差值$\left|pf_x - qf_y\right|$有关（其中$p,q$互质）
+\subsection{切实理解示波器同步的概念，如果发生波形左移或右移应该如何调整才能使其稳定下来}
+\paragraph{同步}被测信号的频率如果是扫描信号整数倍时，每次都能保证波形最左端为相同相位，即示波器所显示波形不会移动，如果两者之间有一定相位差，则被扫描到的相位将会不断变化，导致波形左移或右移。
+\paragraph{调整}使用\textrm{TRIG LEVEL} 按钮调整触发电平高低，使得每次抓取到的信号都保持在同一相位，就可以使波形稳定下来，不会左右移动。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/思考3.pdf}
+    \caption{触发功能示意图}
+\end{figure}
+\end{enumerate}
+\appendix
+\section{实验所摄图片}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{figures/频1.jpg}
+        \caption{出现2个完整波形}
+        \label{pic:2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{figures/频2.jpg}
+        \caption{出现6个完整波形}
+        \label{pic:6}
+    \end{subfigure}
+\caption{比较法测量扫描信号频率}
+\end{figure}
+\begin{figure}[H]
+    \centering
+
+    % --- 第一行 ---
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{figures/1-1.jpg}
+        \caption{1:1}
+        \label{pic:1:1}
+    \end{subfigure}
+    \hfill % 在子图之间添加水平间距
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{figures/1-2.jpg}
+        \caption{1:2}
+        \label{pic:1:2}
+    \end{subfigure}
+    \hfill % 在子图之间添加水平间距
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{figures/1-3.jpg} % <-- 替换为您的图片
+        \caption{1:3}
+        \label{pic:1:3}
+    \end{subfigure}
+
+    \vspace{1em} % 在两行子图之间添加一点垂直间距（可选）
+
+    % --- 第二行 ---
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{figures/2-1.jpg} % <-- 替换为您的图片
+        \caption{2:1}
+        \label{pic:2:1}
+    \end{subfigure}
+    \hfill % 在子图之间添加水平间距
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{figures/2-3.jpg} % <-- 替换为您的图片
+        \caption{2:3}
+        \label{pic:2:3}
+    \end{subfigure}
+    \hfill % 在子图之间添加水平间距
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{figures/3-2.jpg} % <-- 替换为您的图片
+        \caption{3:2}
+        \label{pic:3:2}
+    \end{subfigure}
+
+\caption{用李萨如图形测量未知信号的频率} % 整个图的总标题
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{figures/二极管pp.jpg}
+        \caption{输入电压的峰-峰值}
+        \label{pic:pp}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{figures/二极管p.jpg}
+        \caption{半波电压的峰值}
+        \label{pic:p}
+    \end{subfigure}
+\caption{测量二极管正向导通电压}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{figures/周期.jpg}
+        \caption{输入信号的周期}
+        \label{pic:T}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{figures/相位差.jpg}
+        \caption{两峰之间的相位差}
+        \label{pic:phi}
+    \end{subfigure}
+\caption{测量RC电路相位差}
+\end{figure}
+\insertnotes
+\end{document}
