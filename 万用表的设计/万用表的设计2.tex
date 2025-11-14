@@ -1,18 +1,18 @@
 \documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
 \settemplatedir{../template/}%设置模板路径
 
-\exname{} %实验名称
-\extable{} %实验桌号
-\instructor{} %指导教师
-\class{} %班级
-\name{} %姓名
-\stuid{} %学号
+\exname{万用表的设计} %实验名称
+\extable{7} %实验桌号
+\instructor{居乐乐} %指导教师
+\class{信工2401} %班级
+\name{姚舜瑜} %姓名
+\stuid{3240100532} %学号
 
-\nyear{} %年
-\nmonth{} %月
-\nday{} %日
-\nweekday{} %星期几，e.g. \nweekday{三}
-\daypart{}%上午/下午
+\nyear{2025} %年
+\nmonth{11} %月
+\nday{4} %日
+\nweekday{二} %星期几，e.g. \nweekday{三}
+\daypart{上午}%上午/下午
 
 \redate{} %如有实验补做，补做日期
 \resitu{} %情况说明：
@@ -21,33 +21,384 @@
 \maketitle%输出封面
 
 \section{预习报告（10分）}
-（注：将已经写好的“物理实验预习报告”内容拷贝过来）
-
 \subsection{实验综述（5分）}
-（自述实验现象、实验原理和实验方法，包括必要的光路图、电路图、公式等。不超过500字。）
+\subsubsection{预备实验：测量电流计的内阻}
+在本预备实验中，我们将使用替代法和中值法测量电流计的内阻。
+\paragraph{替代法步骤如下：}
+\begin{enumerate}
+    \item 闭合开关 K，通过调节变阻器 $R$，使标准电流计指针偏转到满刻度（最大电流 $I_g$）。此时记录下变阻器的阻值 $R$。
+    \item 断开待测电流计，接入电阻箱 $R_T$，调节 $R_T$ 使标准电流计指针再次偏转到满刻度（$I_g$）。
+    \item 此时电阻箱的阻值 $R_T$便是待测电流计的内阻。
+\end{enumerate}
+\paragraph{中值法步骤如下：}
+\begin{enumerate}
+    \item 闭合开关 K，调节变阻器 $R$，使电流计指针偏转到满刻度（最大电流 $I_g$）。
+    \item 保持 $R$ 的阻值不变，将电阻箱 $R_Z$ 并联在电流计两端，调节 $R_Z$ 使电流计指针退回至满刻度的一半，即 $I_g/2$。
+    \item 此时电阻箱的阻值 $R_Z$便是待测电流计的内阻。
+\end{enumerate}
+
+
+\begin{table}[H]
+    \centering
+    \begin{minipage}{0.4\textwidth}
+    \includegraphics[width=\textwidth]{figures/替代法.png}
+    \label{fig:替代法}
+    \subcaption{替代法测量电流计内阻示意图}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+    \includegraphics[width=\textwidth]{figures/中值法.png}
+    \label{fig:中值法}
+    \subcaption{中值法测量电流计内阻示意图}
+    \end{minipage}
+    \caption{替代法与中值法测量电流计内阻示意图}
+\end{table}
+
+\subsubsection{设计、改装并校准电流表}
+本实验要求设计一个改装电流表的电路，以实现特定的量程。通过计算所需的分流电阻值，并使用电阻箱进行调节，最终校准改装后的电流表以确保其读数准确。
+
+要实现一个新的量程 $I_{new}$，我们需要给电流计并联一个分流电阻 $R_{1}$，其阻值的计算公式为：
+\begin{equation}
+    R_{1} = \frac{R_{g} I_{g}}{I_{new} - I_{g}}
+\end{equation}
+其中，$R_{g}$ 是电流表的内阻，$I_{g}$ 是电流表的满刻度电流。
+因此我们设计了如\ref{fig:电流表改装电路}的改装电路，将分流电阻 $R_{1}$ 与电流表并联连接。
+
+接下来，我们需要对改装后的电流表进行校准。使用\ref{fig:电流表校准电路}所示电路校验并校准改装电流表，若测量值偏小，则增大电阻箱内阻，反之则减小电阻箱内阻，直至测量值与标准电流表读数相符。记录所得数据并分析误差。
+
+\begin{table}[H]
+    \centering
+    \begin{minipage}{0.4\textwidth}
+    \includegraphics[width=\textwidth]{figures/gaizhuangA.png}
+    \subcaption{电流表改装电路示意图}
+    \label{fig:电流表改装电路}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+    \includegraphics[width=\textwidth]{figures/jiaozhunA.png}
+    \subcaption{电流表校准电路示意图}
+    \label{fig:电流表校准电路}
+    \end{minipage}
+    \caption{电流表改装与校准示意图}
+\end{table}
+
+\subsubsection{设计、改装并校准电压表}
+本实验要求设计一个改装电压表的电路，以实现特定的量程。通过计算所需的串联电阻值，并使用电阻箱进行调节，最终校准改装后的电压表以确保其读数准确。
+
+先将理想电流计（满刻度电流 $I_g$、内阻 $R_g$）与上文分流电阻 $R_1$ 并联，得到量程为 $I_{new}$ 的电流表，其等效内阻
+\begin{equation}
+    R_A = R_g \parallel R_1 = \frac{R_g R_1}{R_g + R_1}
+    = \frac{R_g I_g}{I_{new}}\quad\Big(\text{用 }R_1=\frac{R_g I_g}{I_{new}-I_g}\Big)
+\end{equation}
+再与串联倍压电阻 $R_3$ 构成电压表。使量程为 $U_{new}$（满刻度时电流为 $I_{new}$），则
+\begin{equation}
+    R_3 = \frac{U_{new}}{I_{new}} - R_A
+        = \frac{U_{new}}{I_{new}} - \frac{R_g I_g}{I_{new}}
+        = \frac{U_{new}-R_g I_g}{I_{new}}
+        = \frac{U_{new}}{I_{new}} - \frac{R_g R_1}{R_g + R_1} \, .
+\end{equation}
+因此我们设计了如\ref{fig:电压表改装电路}的改装电路，将串联电阻 $R_{3}$ 与电压表串联连接。
+
+接下来，我们需要对改装后的电压表进行校准。使用\ref{fig:电压表校准电路}所示电路校验并校准改装电压表，若测量值偏小，则减小电阻箱内阻，反之则增大电阻箱内阻，直至测量值与标准电压表读数相符。记录所得数据并分析误差。
+
+\begin{table}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{figures/gaizhuangV.png}
+    \subcaption{电压表改装电路示意图}
+    \label{fig:电压表改装电路}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+    \includegraphics[width=\textwidth]{figures/jiaozhunV.png}
+    \subcaption{电压表校准电路示意图}
+    \label{fig:电压表校准电路}
+    \end{minipage}
+    \caption{电压表改装与校准示意图}
+\end{table}
+
+\subsubsection{设计、改装欧姆表}
+本实验要求设计一个改装欧姆表的电路，以实现特定的量程。通过计算所需的串联电阻值，并使用电阻箱进行调节。
+
+设计欧姆表电路如\ref{fig:ohmmeter-circuit}所示。首先短接$a,b$，调节$R_6$使电流计满偏，此时有：
+\begin{equation}
+I_o = I_g' = \frac{\varepsilon}{R_g'+R'}
+\end{equation}
+
+其中$R'$为回路中其他所有电阻之和。
+当不同$R_x$接入回路时，有:
+\begin{equation}
+I_x = \frac{\varepsilon}{R_g'+R'+R_x}
+\end{equation}
+
+多次调节$R_x$记录$I_x$和$R_x$的值，并可在电流计面板上刻上刻度以显示不同阻值。这样，我们便得到了一个可以反映被测电阻的欧姆表。特别地，当$I_x=\frac{I_o}{2}$时，有$R_x = R_g' + R'$称为欧姆表的中值电阻。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/gaizhuangOhm.png}
+    \caption{欧姆表改装示意图}
+    \label{fig:ohmmeter-circuit}
+\end{figure}
+
+\subsubsection{附加实验}
+\begin{enumerate}
+    \item 探索利用四种伏安法（分压外接法、分压内接法、限流外接法、限流内接法）来测量电阻，自行搭建电路并进行测量，比较各方法的优缺点及测量结果的准确性。
+    \item 探究直流电源的输出功率大小与负载电阻之间的关系，探究负载电阻的功率特性，来验证最大功率传输定理。
+\end{enumerate}
 
 \subsection{实验重点（3分）}
-（简述本实验的学习重点，不超过100字。）
+\begin{enumerate}
+    \item 掌握电流计的工作原理及其内阻的测量方法；
+    \item 学会电流表和电压表的设计、改装与校准方法；
+    \item 理解欧姆表的工作原理及其改装方法。
+\end{enumerate}
 
 \subsection{实验难点（2分）}
-（简述本实验的实现难点，不超过100字。）
-
+\begin{enumerate}
+    \item 设计改装电流表和电压表时，计算并调节电阻箱阻值以实现所需量程；
+    \item 理解并应用误差分析方法，确保实验结果的准确性和可靠性；
+    \item 正确应用电路连接和调试技巧，确保实验过程顺利进行；
+    \item 正确进行实验设计和数据分析。
+\end{enumerate}
 \begin{fullreportonly}
 \section{原始数据（20分）}
-（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/原始数据.jpg}
+    \caption{原始数据}
+\end{figure}
+\newpage
 \section{结果与分析（60分）}
 \subsection{数据处理与结果（30分）}
-（列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+
+\subsubsection{电流表的改装与校准}
+利用内阻为240$\Omega$，满刻度电流为1mA的电流表，设计改装成量程为5mA的电流表。计算所需分流电阻值：
+\begin{equation}
+    R_{1} = \frac{R_{g} I_{g}}{I_{new} - I_{g}} = \frac{240 \times 1}{5 - 1} = 60 \,\Omega
+\end{equation}
+将电流表与60$\Omega$的分流电阻并联连接，构成量程为5mA的电流表。使用可调电流源对改装电流表进行校准。记录校准数据如下：
+\begin{table}[H]
+    % 在这里插入数据处理的内容，如计算过程、数据表格、图表等
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        $I_{\text{准}}$(mA)&0.98&1.97&2.96&3.94&4.45\\
+        \hline
+        $I_{\text{改}}$(读数值)(mA)&0.20&0.40&0.60&0.80&0.90\\
+        \hline
+        $I_{\text{改}}$(理论值)(mA)&1.00&2.00&3.00&4.00&4.50\\
+        \hline
+        $\Delta I (mA)$&+0.02&+0.03&+0.04&+0.06&+0.05\\
+        \hline
+        \end{tabular}
+    \caption{电流表校准数据处理表}
+\end{table}
+
+根据校准时的电流值与理论值的偏差，利用Matlab画出误差折线图，如图所示：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/DeltaI_vs_I_theory.png}
+    \caption{电流表校准误差折线图}
+\end{figure}
+
+\subsubsection{电压表的改装与校准}
+利用前一实验得到的5mA的改装电流表，我们将其设计改装成量程为5V的电压表。计算所需串联电阻值：
+\begin{equation}
+    R_{3} = \frac{U_{new}}{I_{new}} - R_A = \frac{5}{0.005} - \frac{240 \times 1}{5} = 1000 - 48 = 952 \,\Omega
+\end{equation}
+将改装电流表与952$\Omega$的串联电阻连接，构成量程为5V的电压表。使用可调电压源对改装电压表进行校准。记录校准数据如下：
+\begin{table}[H]
+    % 在这里插入数据处理的内容，如计算过程、数据表格、图表等
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        $U_{\text{准}}$(V)&1.05&2.05&3.03&4.01&4.49\\
+        \hline
+        $I_{\text{改}}$(读数值)(mA)&0.20&0.40&0.60&0.80&0.90\\
+        \hline
+        $U_{\text{改}}$(理论值)(V)&1.00&2.00&3.00&4.00&4.50\\
+        \hline
+        $\Delta U (V)$&-0.05&-0.05&-0.03&-0.01&-0.01\\
+        \hline
+        \end{tabular}
+    \caption{电压表校准数据处理表}
+\end{table}
+根据校准时的电压值与理论值的偏差，利用Matlab画出误差折线图，如图所示：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/DeltaU_vs_U_theory.png}
+    \caption{电压表校准误差折线图}
+\end{figure}
+
+\subsubsection{欧姆表的改装与I-R对应关系测定}
+\paragraph{欧姆表组装与I-R曲线测定}
+利用实验一的改装电流表，串联一个220$\Omega$的保护电阻、一个滑动变阻器和一个1.5V的干电池，设计改装成欧姆表。
+把欧姆表两端接入一个电阻箱$R_x$，先将$R_x$调节为0，调节滑动变阻器使电流计满偏，此时有$I_x=1mA$。
+随后调节电阻箱$R_x$，使电流计读数调整至半偏，即$I_x=0.5mA$，此时电阻箱读数为$270\Omega$，说明此时欧姆表整体内阻为$270\Omega$。
+
+随后，调节电阻箱$R_x$的阻值，记录下每个$R_x$对应的电流计读数$I_x$，记录对应数据如下：
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        $R_x(\Omega)$&0&100&200&300&400&500&600\\
+        \hline
+        $I_x$(mA)&1.00&0.73&0.58&0.47&0.40&0.35&0.31\\
+        \hline
+        $R_x(\Omega)$&700&1k&2k&3k&5k&10k&30k\\
+        \hline
+        $I_x$(mA)&0.27&0.21&0.16&0.07&0.04&0.01&0.00\\
+        \hline
+        \end{tabular}
+\end{table}
+
+利用Matlab绘制$I_x$与$R_x$的关系曲线，如下所示：
+\begin{table}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Ix_vs_Rx_linear.png}
+    \caption{欧姆表 I–R 关系曲线}\label{Ix_vs_Rx_linear}
+\end{table}
+
+
+\paragraph{模型推导与拟合结果分析}
+将电源内阻并入固定串联电阻，记欧姆表的固定内阻为 $R_0=R_g'+R'$，被测电阻为 $R_x$，电源电动势为 $\varepsilon$。改装电流表由 \SI{1}{mA} 表头并联分流电阻得到 \SI{5}{mA} 量程，表头读数 $I_x$ 为总电流的 $1/m$（本实验 $m=5$）。于是
+\begin{equation}
+    I_x \,=\, \frac{1}{m}\,\frac{\varepsilon}{R_0+R_x} \,=\, \frac{K/m}{R_0+R_x},
+\end{equation}
+其中 $K\,(\si{\milli\ampere\ohm})$ 为等效比例常数。由此得到两个常用的等价线性化形式：
+\begin{equation}
+    \frac{1}{I_x} \,=\, \frac{m}{K}\,R_x + \frac{m}{K}\,R_0\,,\qquad
+    R_x \,=\, \frac{K/m}{I_x} - R_0\,.
+\end{equation}
+“半偏”性质仍然成立：当 $R_x=R_0$ 时 $I_x = I_{x0}/2$（$I_{x0}$ 为 $R_x=0$ 时表头电流）。
+
+为检验模型，我们在 $m=5$ 前提下对上表数据做了三种回归：
+\begin{itemize}
+    \item 线性化一：以 $Y=\frac{1}{I_x}$、$X=R_x$ 回归 $Y=(m/K)X+(m/K)R_0$（斜率为 $m/K$，据此可还原 $K$）；
+    \item 线性化二（按要求）：以 $Y=R_x$、$X=\frac{1}{I_x}$ 回归 $Y=(K/m)X- R_0$（斜率对应 $K/m$）；
+    \item 非线性拟合（推荐）：直接在原模型 $\frac{K/m}{R_0+R_x}$ 上做最小二乘。
+\end{itemize}
+
+本实验基于上述数据（去除 $10\,\mathrm{k\Omega}$ 与 $30\,\mathrm{k\Omega}$ 两点）得到的数值结果为：
+\begin{itemize}
+    \item 线性化一（$\frac{1}{I_x}$–$R_x$）：$R^2=0.972910$，$K=\SI{1075.226541}{\milli\ampere\ohm}$，$R_0=\SI{83.032748}{\ohm}$；
+    \item 线性化二（$R_x$–$\frac{1}{I_x}$）：$R^2=0.972910$，斜率 $K/m=\SI{209.219838}{\milli\ampere\ohm}$，据此 $K=\SI{1046.099191}{\milli\ampere\ohm}$，$R_0=\SI{49.630507}{\ohm}$；
+    \item 非线性拟合（$I_x=(K/m)/(R_0+R_x)$）：$K=\SI{1350.765866}{\milli\ampere\ohm}$，$R_0=\SI{270.145089}{\ohm}$，因而 $K/m=\SI{270.153173}{\milli\ampere\ohm}$。
+\end{itemize}
+
+从结果看，两个线性化口径虽然 $R^2$ 接近，但对 $R_0$ 的估计却和真实的“半偏阻值”（$270\Omega$）相差甚远，这是因为对 $\frac{1}{I_x}$ 做普通最小二乘会放大小电流处的误差，易产生参数偏差。
+因此我们采取直接在原始模型上做非线性回归的方式，能更好地保持物理意义与一致性。且拟合结果也更加出色。
+
+\paragraph{最终关系式}
+采用非线性拟合所得参数并考虑 $m=5$，得到 $K=\SI{1350.765866}{\milli\ampere\ohm}$、$R_0=\SI{270.145089}{\ohm}$，因而 $K/m=\SI{270.153173}{\milli\ampere\ohm}$。故
+\begin{equation}
+    \boxed{\ R_x[\Omega] \approx \frac{K/m}{\,I_x[\mathrm{mA}]\,} - R_0\  \approx \frac{270.153}{\,I_x[\mathrm{mA}]\,} - 270.145\ }.
+\end{equation}
+若改用 SI 单位（$I_x$ 以 A 计），则上述常数相应除以 $1000$，公式同形。
+
+注意到，此时的两个常数与“半偏”性质高度吻合：当 $I_x=0.5\,\mathrm{mA}$ 时，$R_x \approx 270.153/0.5 - 270.145 \approx 540.306 - 270.145 \approx 270.161\,\Omega$，与测量得到的 $270\,\Omega$ 非常接近；
+同时，模型中的$K$正是对应了欧姆表的内电源电动势$\varepsilon$，拟合得到$\varepsilon \approx 1.35\,\mathrm{V}$，与标注$1.5V$的干电池的数据也比较吻合且在合理范围内。这充分验证了模型的正确性。
+
+为直观起见，下列图像给出三种回归的可视化对比：
+\begin{table}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+            \includegraphics[width=\textwidth]{figures/ohmmeter_linearization.png}
+    \subcaption{线性化：$\frac{1}{I_x}$–$R_x$}
+
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+         \includegraphics[width=\textwidth]{figures/ohmmeter_R_vs_invI_linear.png}
+    \subcaption{线性化二（按要求）：$R_x$–$\frac{1}{I_x}$ 的线性拟合}
+
+    \end{minipage}
+    \caption{欧姆表三种回归方式的图像（上排）}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=0.55\textwidth]{figures/ohmmeter_I_vs_R_fit.png}
+    \caption{$I_x$–$R_x$ 非线性拟合：$I_x=(K/m)/(R_0+R_x)$}
+
+\end{figure}
+
 
 \subsection{误差分析（20分）}
-（运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+我们以标准表读数（$I_\text{准}$、$U_\text{准}$）作为参考值，令误差定义为 $\Delta I = I_\text{估}-I_\text{准}$、$\Delta U = U_\text{估}-U_\text{准}$。相对误差定义为 $\delta_I=\Delta I/I_\text{准}$、$\delta_U=\Delta U/U_\text{准}$。不确定度方面，采用A类不确定度：
+\begin{equation}
+    s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (\Delta_i-\overline{\Delta})^2},\qquad
+    u = \frac{s}{\sqrt{n}}\,.
+\end{equation}
+
+\paragraph{实验一：电流表的改装与校准}
+由表中五组$\Delta I$数据可得：
+\begin{align}
+    \overline{\Delta I} &= \SI{0.040}{\milli\ampere}, \\
+    s_{\Delta I} &\approx \SI{0.0158}{\milli\ampere}, \\
+    u(\Delta I) &= \frac{s}{\sqrt{5}} \approx \SI{0.0071}{\milli\ampere}.
+\end{align}
+用每个点的相对误差 $\delta_I=\Delta I/I_\text{准}$ 的平均值衡量总体相对误差，有：
+\begin{equation}
+    \overline{\delta_I} = \frac{1}{5}\sum_{i=1}^5 \delta_{I,i} \approx \SI{1.51}{\percent}.
+\end{equation}
+用 $\overline{I_\text{准}}=\SI{2.86}{\milli\ampere}$ 来估计相对标准不确定度，可得到：
+\begin{equation}
+    u_\text{rel}(I) = \frac{u(\Delta I)}{\overline{I_\text{准}}} \approx \frac{\SI{0.0071}{\milli\ampere}}{\SI{2.86}{\milli\ampere}} \approx \SI{0.247}{\percent}.
+\end{equation}
+据此，可给出电流校准误差的结果表达式为：
+\begin{equation}
+\boxed{\Delta I = \SI{0.040}{\milli\ampere} \pm \SI{0.007}{\milli\ampere}}
+\end{equation}
+对应平均相对误差约 \SI{1.51}{\percent}，相对标准不确定度约 \SI{0.25}{\percent}。
+
+\paragraph{实验二：电压表的改装与校准}
+由表中五组$\Delta U$数据可得：
+\begin{align}
+    \overline{\Delta U} &= \SI{-0.030}{\volt}, \\
+    s_{\Delta U} &\approx \SI{0.020}{\volt}, \\
+    u(\Delta U) &= \frac{s}{\sqrt{5}} \approx \SI{0.00894}{\volt}.
+\end{align}
+
+用每个点的相对误差 $\delta_U=\Delta U/U_\text{准}$ 的平均值衡量总体相对误差，有：
+\begin{equation}
+    \overline{\delta_U}=\SI{-1.73}{\percent}.
+\end{equation}
+    以 $\overline{U_\text{准}}=\SI{2.926}{\volt}$ 来估计相对标准不确定度，可得到：
+\begin{equation}
+    u_\text{rel}(U) = \frac{u(\Delta U)}{\overline{U_\text{准}}} \approx \frac{\SI{0.00894}{\volt}}{\SI{2.926}{\volt}} \approx \SI{0.306}{\percent}.
+\end{equation}
+据此，可给出电压校准误差的结果表达式为：
+\begin{equation}
+\boxed{\Delta U = \SI{-0.030}{\volt} \pm \SI{0.009}{\volt}}
+\end{equation}
+对应平均相对误差约 \SI{-1.73}{\percent}，相对标准不确定度约 \SI{0.31}{\percent}。
+
+\paragraph{主要误差来源简述}
+在本实验中，主要误差来源包括以下几个方面：
+\begin{enumerate}
+    \item 仪器精度限制：电流表、电压表和欧姆表本身的精度有限，可能导致读数误差。
+    \item 接触电阻：实验过程中连接线和接点的接触电阻可能引入额外的阻值，影响测量精度。
+    \item 人为读数误差：在读取仪表读数时，可能存在视差或读数不准确的情况。
+\end{enumerate}
 
 \subsection{实验探讨（10分）}
-（对实验内容、现象和过程的小结，不超过100字。）
+通过本实验，我们深入理解了电流表、电压表和欧姆表的工作原理及其改装方法。在理论层面上，我们学习了如何计算分流电阻和串联电阻以实现所需的测量功能。
+在实践层面上，我们通过实际操作改装和校准仪表，掌握了电流表、电压表、欧姆表的搭建步骤，并学会了如何使用可调电源进行校准。通过数据处理和误差分析，我们还学会了如何拟合实验数据，验证理论模型的准确性。
 
 \section{思考题（10分）}
-（解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+\subsection{为什么不能用万用表欧姆挡测量电源电阻?}
+首先，从原理上说，欧姆表是由$\frac{\varepsilon}{I_g}$的若干倍来标称电阻的，当外接电源时，分子就不再是欧姆表内置电源的电动势$\varepsilon$，而是$\varepsilon$与外接电源的电动势之和（差），因此结果是错误的。
+
+其次，欧姆表的满偏电流和内置电源电压都比较小，若外接电源电压较大，或者反接，可能会使欧姆表超量程乃至损坏。
+\subsection{为什么不能用欧姆表测量另一表头内阻?}
+
+首先，表头电阻较小，而欧姆表测量精度较低，测量误差比较大；其次，表头允许流过的电流很小，而欧姆表测量时，电流较大，可能会损坏表头。综合考虑，通常不建议用欧姆表测量另一表头内阻。
+
+如果一定要测量的话，可以串联一个电阻箱，调整其阻值使该支路总阻值约为中值电阻，用欧姆表测出总阻值，再减去电阻箱阻值，即为表头内阻。
+
+\subsection{为什么$I_x$与$R_x$为非线性关系?}
+    根据前面的推导过程我们可以知道，总电流 $I=\varepsilon/(R_g'+R'+R_x)$，而表头读数 $I_x=I/m$。因此
+    $I_x = \frac{1}{m}\,\frac{\varepsilon}{R_g' + R' + R_x} = \frac{K/m}{R_0+R_x}$，
+    其中 $K$、$R_0$ 为常数；可见 $I_x$ 与 $R_x$ 呈反比例关系，显然是非线性的。
+
+    而根据实验数据处理中的拟合结果也验证了这一点，$I_x$—$R_x$ 的关系曲线明显不是一条直线。具体表达式已在数据处理部分给出。
 \end{fullreportonly}
 \insertnotes
 \end{document}
