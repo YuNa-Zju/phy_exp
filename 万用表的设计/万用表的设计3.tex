@@ -1,0 +1,108 @@
+\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\settemplatedir{../template/}%设置模板路径
+
+\exname{} %实验名称
+\extable{} %实验桌号
+\instructor{} %指导教师
+\class{} %班级
+\name{} %姓名
+\stuid{} %学号
+
+\nyear{} %年
+\nmonth{} %月
+\nday{} %日
+\nweekday{} %星期几，e.g. \nweekday{三}
+\daypart{}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+
+\begin{document}
+\maketitle%输出封面
+
+\section{预习报告（10分）}
+\subsection{实验综述（5分）}
+\subsubsection{实验原理}
+\begin{enumerate}
+    \item \textbf{内阻测定（替代法）}：利用电阻箱模拟表头在电路中的阻碍作用。如图\ref{fig:circuits}(a)，当电阻箱接入电路后的电流与接入表头时的电流（$I_0$）一致时，认为电阻箱阻值等于表头内阻 $R_g$。
+    \item \textbf{量程扩展原理}：
+    \begin{itemize}
+        \item \textbf{电流表}：根据并联分流原理，在表头两端并联电阻 $R_1$（图b），分担 $I_1 - I_g$ 的电流。
+        \item \textbf{电压表}：根据串联分压原理，在表头（或改装电流表）上串联电阻 $R_3$（图c），承担 $U_1 - U_g'$ 的电压。
+    \end{itemize}
+    \item \textbf{欧姆表原理}：基于闭合电路欧姆定律（图d）。电源电动势 $\varepsilon$ 恒定时，回路电流 $I$ 随外接电阻 $R_x$ 变化，即 $I = \frac{\varepsilon}{R_{\text{内}} + R_x}$，通过电流刻度标示电阻值。
+\end{enumerate}
+
+\subsubsection{实验流程}
+\begin{enumerate}
+    \item \textbf{测定内阻}：搭建替代法电路，精确测定微安表内阻 $R_g$。
+    \item \textbf{改装与校准电流表}：
+    \begin{itemize}
+        \item 计算分流电阻 $R_1 = \frac{I_g R_g}{I_1 - I_g}$，调节电阻箱并接入。
+        \item 与标准表比对，若读数偏小（分流过大），则需\textbf{增大} $R_1$，反之减小，直至误差合规。
+    \end{itemize}
+    \item \textbf{改装与校准电压表}：
+    \begin{itemize}
+        \item 计算分压电阻 $R_3 = \frac{U_1}{I_1} - R_{\text{表}}$，调节电阻箱并串联接入。
+        \item 与标准表比对，若读数偏小（分压过大），则需\textbf{减小} $R_3$，反之增大。
+    \end{itemize}
+    \item \textbf{组装欧姆表}：连接电路，短接调零后，测量电阻箱不同阻值下的电流值，绘制刻度曲线。
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.23\textwidth}
+        \includegraphics[width=\textwidth]{tidaifa.png}
+        \caption{内阻测定}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.23\textwidth}
+        \includegraphics[width=\textwidth]{gaizhuangA.png}
+        \caption{改电流表}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.23\textwidth}
+        \includegraphics[width=\textwidth]{gaizhuangV.png}
+        \caption{改电压表}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.23\textwidth}
+        \includegraphics[width=\textwidth]{gaizhuangOhm.png}
+        \caption{改欧姆表}
+    \end{subfigure}
+    \caption{实验原理与改装电路图}
+    \label{fig:circuits}
+\end{figure}
+
+\subsection{实验重点（3分）}
+\begin{enumerate}
+    \item 掌握替代法测量微安表内阻的操作细节。
+    \item 熟练运用分流与分压公式计算电阻箱阻值，实现量程扩展。
+    \item 掌握改装表的校准方法，特别是根据测量误差（偏大或偏小）反向推导并调整电阻箱阻值的策略。
+\end{enumerate}
+
+\subsection{实验难点（2分）}
+\begin{enumerate}
+    \item 校准过程中的逻辑判断：当改装表读数与标准表不符时，需准确判断是增大还是减小电路中的电阻箱阻值。
+    \item 正确计算并调整电阻箱组织：需根据实际测量数据反复计算，确保分流或分压电阻阻值的准确性。
+    \item 实验操作繁琐：涉及多次电路拆装与重组，接线较多，容易出现接触不良或接线错误导致的系统误差。
+\end{enumerate}
+\begin{fullreportonly}
+\section{原始数据（20分）}
+（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+
+\section{结果与分析（60分）}
+\subsection{数据处理与结果（30分）}
+（列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+
+\subsection{误差分析（20分）}
+（运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+
+\subsection{实验探讨（10分）}
+（对实验内容、现象和过程的小结，不超过100字。）
+
+\section{思考题（10分）}
+（解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+\end{fullreportonly}
+\insertnotes
+\end{document}
