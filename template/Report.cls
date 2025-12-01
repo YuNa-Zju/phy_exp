@@ -1,4 +1,4 @@
-\ProvidesClass{Preport}
+\ProvidesClass{Report}
 \LoadClass{ctexart}
 \RequirePackage{graphicx, xcolor, tikz, amsmath}
 \RequirePackage{geometry, titlesec, fancyhdr}
@@ -12,12 +12,12 @@
 \RequirePackage{booktabs, tabularx, array, subcaption, hyperref}
 \RequirePackage{currfile, cleveref, comment, multirow, enumitem}
 \hypersetup{
-    colorlinks=true,
+  colorlinks=true,
 }
 %%%%%%%%%%%%%%%%%%%%%单位格式
 \sisetup{
-    separate-uncertainty = true,
-    per-mode = symbol
+  separate-uncertainty = true,
+  per-mode = symbol
 }
 %%%%%%%%%%%%%%%%%%%%%%
 
@@ -185,7 +185,7 @@
 \newcommand{\@makecover@preview}{%
   \phantom{\fontsize{42pt}{50.4pt}\selectfont wcnm的LaTeX}
 
-    \begin{center}
+  \begin{center}
     {\fontsize{36pt}{6pt}\selectfont \fbsong{物理实验预习报告}}\\
     \vspace{15.18mm}
     \vspace{17.712mm}
@@ -194,7 +194,7 @@
     \centering
     \renewcommand\arraystretch{2}
     \begin{tabular}{l@{}l}
-      \fbsong{实验名称：} & \underlinetext[69.125mm]{\@exname} \\
+      \fbsong{实验名称：} & \underlinetext[69.125mm]{\@exname}     \\
       \fbsong{指导教师：} & \underlinetext[69.125mm]{\@instructor}
     \end{tabular}
 
@@ -203,8 +203,8 @@
     \centering
     \renewcommand\arraystretch{2}
     \begin{tabular}{l@{}l}
-      \fbsong{班级：} & \underlinetext[79.695mm]{\@class}  \\
-      \fbsong{姓名：} & \underlinetext[79.695mm]{\@name}   \\
+      \fbsong{班级：} & \underlinetext[79.695mm]{\@class} \\
+      \fbsong{姓名：} & \underlinetext[79.695mm]{\@name}  \\
       \fbsong{学号：} & \underlinetext[79.695mm]{\@stuid}
     \end{tabular}
 
@@ -215,7 +215,7 @@
 
       \vspace{8.694mm}
 
-    \large{浙江大学物理实验教学中心}
+      \large{浙江大学物理实验教学中心}
     \end{center}
   \end{center}
   \thispagestyle{plain}
@@ -237,8 +237,8 @@
     \centering
     \renewcommand\arraystretch{2}
     \begin{tabular}{l@{}l}
-      \fbsong{实验名称：} & \underlinetext[69.125mm]{\@exname} \\
-      \fbsong{实验桌号：} & \underlinetext[69.125mm]{\@extable} \\
+      \fbsong{实验名称：} & \underlinetext[69.125mm]{\@exname}     \\
+      \fbsong{实验桌号：} & \underlinetext[69.125mm]{\@extable}    \\
       \fbsong{指导教师：} & \underlinetext[69.125mm]{\@instructor}
     \end{tabular}
 
@@ -247,8 +247,8 @@
     \centering
     \renewcommand\arraystretch{2}
     \begin{tabular}{l@{}l}
-      \fbsong{班级：} & \underlinetext[79.695mm]{\@class}  \\
-      \fbsong{姓名：} & \underlinetext[79.695mm]{\@name}   \\
+      \fbsong{班级：} & \underlinetext[79.695mm]{\@class} \\
+      \fbsong{姓名：} & \underlinetext[79.695mm]{\@name}  \\
       \fbsong{学号：} & \underlinetext[79.695mm]{\@stuid}
     \end{tabular}
 
@@ -256,8 +256,8 @@
 
     \begin{center}
       \large{\fbsong{实验日期：}\underlinetext[9.66mm]{\@nyear}\fbsong{年}\underlinetext[9.66mm]{\@nmonth}\fbsong{月}\underlinetext[9.66mm]{\@nday}\fbsong{日}\hspace{7.245mm}\fbsong{星期}\underlinetext[7.245mm]{\@nweekday}\fbsong{\@daypart}}\\
-    \textcolor[gray]{0.4}{\small{（此处填实验选课系统内日期）}}\\
-    \large{浙江大学物理实验教学中心}
+      \textcolor[gray]{0.4}{\small{（此处填实验选课系统内日期）}}\\
+      \large{浙江大学物理实验教学中心}
     \end{center}
   \end{center}
 
