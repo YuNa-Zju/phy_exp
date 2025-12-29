@@ -1,0 +1,123 @@
+\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\settemplatedir{../template/}%设置模板路径
+
+\exname{} %实验名称
+\extable{} %实验桌号
+\instructor{} %指导教师
+\class{} %班级
+\name{} %姓名
+\stuid{} %学号
+
+\nyear{} %年
+\nmonth{} %月
+\nday{} %日
+\nweekday{} %星期几，e.g. \nweekday{三}
+\daypart{}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+
+\begin{document}
+\maketitle%输出封面
+
+\section{预习报告（10分）}
+
+\subsection{实验综述（5分）}
+
+\subsubsection{实验原理}
+
+\paragraph{杨氏模量的物理内涵}
+物体在受到外力作用时会发生形变，若撤去外力后能恢复原状，该形变称为弹性形变。在弹性限度内，根据胡克定律，固体的应力（单位面积所受的力 $F/S$）与应变（相对伸长量 $\Delta L/L$）成正比。这一比例系数即为杨氏模量 $E$，它定量描述了材料抵抗弹性形变的能力（即刚度）。其数学表达式为：
+\begin{equation}
+    E = \frac{F/S}{\Delta L/L} = \frac{FL}{S\Delta L}
+\end{equation}
+式中，$F$ 为外力（实验中由砝码重力 $mg$ 提供），$L$ 为金属丝原长，$S$ 为其横截面积。由于金属丝的伸长量 $\Delta L$ 极为微小，直接测量难度大且精度低，故本实验采用光杠杆法进行放大测量。实验整体装置如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{shiyanzhuangzhi.png}
+    \caption{金属材料杨氏模量测定的实验装置}
+    \label{fig:shiyanzhuangzhi}
+\end{figure}
+
+\paragraph{光杠杆放大测量机制}
+光杠杆系统由平面镜、望远镜和直标尺组成。光杠杆镜是一个带有三个足尖的平面镜装置（如下图所示），其前两足 $O_1, O_2$ 置于固定平台上，后足 $O_3$ 置于随金属丝伸缩的活动夹具上。设后足到前两足连线的垂直距离为 $b$。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{guanggangganjing.png}
+    \caption{光杠杆镜}
+    \label{fig:guanggangganjing}
+\end{figure}
+
+当金属丝受力伸长 $\Delta L$ 时，光杠杆后足随之下降，导致平面镜绕前两足连线转动一个微小角度 $\theta$。由几何关系可知 $\theta \approx \tan\theta = \Delta L / b$。
+同时，入射光线方向不变，平面镜转动 $\theta$ 角，反射光线将偏转 $2\theta$ 角。此时，望远镜视野中的标尺读数变化量 $\Delta S$ 与标尺到镜面的垂直距离 $D$ 满足关系 $\Delta S \approx D \tan(2\theta) \approx 2D\theta$。光路原理如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{guanglutu.png}
+    \caption{本实验的光路图}
+    \label{fig:guanglutu}
+\end{figure}
+
+联立上述几何关系，可得伸长量的放大公式：
+\begin{equation}
+    \Delta S = \frac{2D}{b} \Delta L
+\end{equation}
+该式表明，微小的 $\Delta L$ 被放大了 $K = 2D/b$ 倍。将此关系及金属丝截面积 $S=\frac{1}{4}\pi d^2$ 代入杨氏模量定义式，整理可得最终测量公式：
+\begin{equation}
+    E = \frac{8mgLD}{\pi d^2 b \Delta S}
+\end{equation}
+通过测量上述各物理量，即可求得杨氏模量。
+
+\subsubsection{实验内容与操作流程}
+本实验主要包含基础参数测量、光路系统调节及拉伸数据采集三个部分。
+
+实验伊始，需使用精密仪器测定各常数。利用游标卡尺和螺旋测微计在金属丝不同位置多次测量直径 $d$，以降低不均匀性带来的误差；同时测定金属丝有效长度 $L$ 及光杠杆参数 $b$（通常采用压痕法测量）。
+
+随后进行光路调节，这是实验成功的关键。需调整杨氏模量仪底座水平及立柱铅直，确保金属丝在拉伸过程中无摩擦。安装光杠杆时，应保证镜面铅直。调节望远镜时，需使其光轴与平面镜中心等高，并仔细调焦直至看到清晰的标尺像，且必须消除视差，即眼睛上下移动时，十字叉丝与标尺像无相对位移。
+
+最后进行加减负荷测量。在预加负荷拉直金属丝后，记录初始读数。依次增加砝码至最大负荷，再依次减少砝码，记录对应的标尺读数。采用往复测量并取平均值的方法，既能减小误差，又能验证金属丝是否处于弹性限度内。最终数据采用逐差法处理。
+
+\subsection{实验重点}
+\begin{enumerate}
+    \item \textbf{理论认知}：深入理解杨氏模量的物理意义，掌握光杠杆将微小位移转化为宏观位移的几何光学原理，明确放大倍数 $2D/b$ 的来源。
+    \item \textbf{光路调节技术}：熟练掌握望远镜与光杠杆系统的共轴调节技巧，能够独立完成寻像及视差消除的操作。
+    \item \textbf{数据处理能力}：掌握“逐差法”在处理等间距变化数据中的应用，以有效消除定值系统误差，并能够规范地计算不确定度。
+\end{enumerate}
+
+\subsection{实验难点}
+\begin{enumerate}
+    \item \textbf{光路系统的精细校准}：在望远镜中寻找标尺像往往较为困难，需要耐心地配合使用镜筒外粗找与目镜内微调。此外，视差的彻底消除对观察者的细致程度要求较高，若未完全消除将直接影响读数精度。
+    \item \textbf{实验过程的稳定性控制}：光杠杆装置对震动极为敏感。在手动加减砝码时，动作需保持高度平稳轻柔，任何轻微的冲击都可能导致平面镜足尖移位或金属丝晃动，从而破坏测量基准。
+    \item \textbf{系统垂直状态的维持}：必须严格保证底座水平和立柱铅直，确保金属丝在套管内自由伸缩。若金属丝与平台孔壁发生接触摩擦，将导致应力分布不均，显著增大测量误差。
+\end{enumerate}
+
+\subsection{实验综述（5分）}
+（自述实验现象、实验原理和实验方法，包括必要的光路图、电路图、公式等。不超过500字。）
+
+\subsection{实验重点（3分）}
+（简述本实验的学习重点，不超过100字。）
+
+\subsection{实验难点（2分）}
+（简述本实验的实现难点，不超过100字。）
+
+\begin{fullreportonly}
+    \section{原始数据（20分）}
+    （将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+
+    \section{结果与分析（60分）}
+    \subsection{数据处理与结果（30分）}
+    （列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+
+    \subsection{误差分析（20分）}
+    （运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+
+    \subsection{实验探讨（10分）}
+    （对实验内容、现象和过程的小结，不超过100字。）
+
+    \section{思考题（10分）}
+    （解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+\end{fullreportonly}
+\insertnotes
+\end{document}

@@ -2,17 +2,17 @@
 \settemplatedir{../template/}%设置模板路径
 
 \exname{示波器的应用} %实验名称
-\extable{9} %实验桌号
-\instructor{王鲲} %指导教师
-\class{微电子2401} %班级
-\name{黄千格} %姓名
-\stuid{3240100650} %学号
+\extable{} %实验桌号
+\instructor{} %指导教师
+\class{} %班级
+\name{} %姓名
+\stuid{} %学号
 
-\nyear{2025} %年
-\nmonth{12} %月
-\nday{29} %日
-\nweekday{一} %星期几，e.g. \nweekday{三}
-\daypart{上午}%上午/下午
+\nyear{} %年
+\nmonth{} %月
+\nday{} %日
+\nweekday{} %星期几，e.g. \nweekday{三}
+\daypart{}%上午/下午
 
 \redate{} %如有实验补做，补做日期
 \resitu{} %情况说明：
@@ -266,7 +266,7 @@ $\Delta t$(\si{\milli\second})   &   0.108      &  0.105             \\ \hline
 
 \begin{enumerate}
     \item \textbf{系统性仪器误差}
-    
+
     这是本实验误差的最主要来源，其影响贯穿于信号产生与处理的全过程：
     \begin{itemize}
         \item \textbf{信号源输出与示值的不一致性：} 实验中所使用的函数信号发生器并非绝对频率基准。其显示的设定值与内部压控振荡器（VCO）或直接数字频率合成（DDS）产生的实际物理频率之间存在固有的频率偏差。在实验一中，时基频率理论值 $f_x$ 为 \SI{200}{\hertz}，而实测均值 $\bar{f} = \SI{195.746}{\hertz}$，约 \SI{2.1}{\percent} 的偏离值反映了仪器时钟参考源的校准残留误差。
@@ -274,7 +274,7 @@ $\Delta t$(\si{\milli\second})   &   0.108      &  0.105             \\ \hline
     \end{itemize}
 
     \item \textbf{分辨力限制与随机读数误差}
-    
+
     读数过程中的主观判断与显示终端的物理限制构成了随机误差的主体：
     \begin{itemize}
         \item \textbf{荧光屏轨迹的物理线宽效应：} 示波器呈现的并非理想的几何线，而是具有一定弥散圆直径的电子束轨迹。在利用光标（Cursors）定位波峰或波谷时，光标线与具有一定宽度的波形边缘重合处存在模糊带，这在测量电压峰-峰值 $V_{pp}$ 或相位角时，引入了不可避免的空间分辨率误差。
@@ -282,14 +282,14 @@ $\Delta t$(\si{\milli\second})   &   0.108      &  0.105             \\ \hline
     \end{itemize}
 
     \item \textbf{量程校准与非线性响应}
-    
+
     示波器内部的放大电路（垂直系统）和扫描电路（水平系统）存在微小的非线性失真：
     \begin{itemize}
         \item 垂直灵敏度（\si{\volt\per div}）与水平扫描速度（\si{\ms\per div}）在各量程档位间的切换并非绝对线性。虽然本实验所用仪器性能良好，但在大跨度量程切换时，衰减器和放大器的增益误差仍可能对测量结果产生微扰。
     \end{itemize}
 
     \item \textbf{结论与改进策略}
-    
+
     综上所述，本实验的误差由仪器频率基准偏差与人工读数限制共同构成。为进一步提升实验精度，实验中采取了多次测量求平均值的方法以削弱随机误差的影响；同时，优先选择光标自动测量而非肉眼估读格数，有效地控制了相对误差。最终结果显示，实验数据在工程允许范围内具有极高的可靠性。
 
 \end{enumerate}
@@ -336,28 +336,28 @@ $\Delta t$(\si{\milli\second})   &   0.108      &  0.105             \\ \hline
     \begin{tikzpicture}[scale=1.2]
         % 绘制网格
         \draw[very thin, lightgray!40] (0,-1.5) grid (6,1.5);
-        
+
         % 画坐标轴
         \draw[->,thick] (0,0) -- (6,0) node[right] {$t$};
         \draw[->,thick] (0,-1.5) -- (0,1.5) node[above] {$U$};
-        
+
         % 画正弦波 (模拟输入信号)
         \draw[blue, thick, domain=0:5.5, samples=100] plot (\x, {sin(\x r * 3)});
-        
+
         % 画触发电平线
         \draw[red, dashed, thick] (0, 0.6) -- (5.5, 0.6) node[right, font=\small] {Level};
-        
+
         % 标注触发点 (交点)
         \fill[red] (0.22, 0.6) circle (2pt);
         \fill[red] (2.31, 0.6) circle (2pt);
         \fill[red] (4.41, 0.6) circle (2pt);
-        
+
         % 扫描起始标注
         \draw[<-] (0.22, 0.7) -- (1, 1.3) node[right, font=\footnotesize] {每次扫描均由此相位起始};
-        
+
         % 周期标注
         \draw[<->, gray, thick] (0.22, -1.1) -- (2.31, -1.1) node[midway, below, font=\footnotesize] {信号周期 $T$};
-        
+
         % 示意触发脉冲
         \foreach \x in {0.22, 2.31, 4.41}
             \draw[green!50!black, thick] (\x, -1.8) -- (\x, -1.4) -- (\x+0.1, -1.4) -- (\x+0.1, -1.8);
