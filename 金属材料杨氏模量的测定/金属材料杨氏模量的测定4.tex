@@ -1,4 +1,4 @@
-\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\documentclass{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
 \settemplatedir{../template/}%设置模板路径
 
 \exname{} %实验名称
@@ -93,31 +93,200 @@
     \item \textbf{系统垂直状态的维持}：必须严格保证底座水平和立柱铅直，确保金属丝在套管内自由伸缩。若金属丝与平台孔壁发生接触摩擦，将导致应力分布不均，显著增大测量误差。
 \end{enumerate}
 
-\subsection{实验综述（5分）}
-（自述实验现象、实验原理和实验方法，包括必要的光路图、电路图、公式等。不超过500字。）
-
-\subsection{实验重点（3分）}
-（简述本实验的学习重点，不超过100字。）
-
-\subsection{实验难点（2分）}
-（简述本实验的实现难点，不超过100字。）
-
 \begin{fullreportonly}
     \section{原始数据（20分）}
     （将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
 
     \section{结果与分析（60分）}
+
     \subsection{数据处理与结果（30分）}
-    （列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+
+    \subsubsection{几何参数测量数据}
+    实验中对金属丝的几何参数（长度 $L$、标尺距离 $D$、光杠杆常数 $b$、直径 $d$）均进行了 6 次独立测量。
+
+    \begin{table}[H]
+        \centering
+        \caption{金属丝几何参数测量数据表}
+        \begin{tabular}{ccccc}
+            \toprule
+            序号  & $L$ (\si{\centi\meter})              & $D$ (\si{\centi\meter})               & $b$ (\si{\milli\meter})              & $d$ (\si{\milli\meter})              \\
+            \midrule
+            1   & 98.70                                & 132.45                                & 69.16                                & 0.586                                \\
+            2   & 98.70                                & 134.10                                & 69.22                                & 0.586                                \\
+            3   & 98.79                                & 133.20                                & 69.22                                & 0.589                                \\
+            4   & 98.68                                & 133.61                                & 69.18                                & 0.595                                \\
+            5   & 98.70                                & 133.50                                & 69.20                                & 0.590                                \\
+            6   & 98.72                                & 133.48                                & 69.12                                & 0.592                                \\
+            \midrule
+            平均值 & $\bar{L} = \SI{98.72}{\centi\meter}$ & $\bar{D} = \SI{133.39}{\centi\meter}$ & $\bar{b} = \SI{69.18}{\milli\meter}$ & $\bar{d} = \SI{0.590}{\milli\meter}$ \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+
+    \subsubsection{标尺读数与线性拟合}
+    通过望远镜，可以加载一定质量之后标尺的读数，数据如\cref{tab:avg}所示。
+    \begin{table}[H]
+        \centering
+        \caption{标尺读数记录与平均值计算表}
+        \label{tab:avg}
+        \begin{tabular}{cccc}
+            \toprule
+            {质量 $m$}            & {增砝码读数 $n_{\text{up}}$} & {减砝码读数 $n_{\text{down}}$} & {平均读数 $\bar{n}$}      \\
+            {(\si{\kilo\gram})} & {(\si{\centi\meter})}   & {(\si{\centi\meter})}     & {(\si{\centi\meter})} \\
+            \midrule
+            2                   & 0.70                    & 0.68                      & 0.69                  \\
+            3                   & 0.31                    & 0.10                      & 0.20                  \\
+            4                   & -0.60                   & -0.75                     & -0.67                 \\
+            5                   & -1.25                   & -1.21                     & -1.23                 \\
+            6                   & -1.92                   & -1.95                     & -1.93                 \\
+            7                   & -3.00                   & -2.50                     & -2.75                 \\
+            8                   & -3.50                   & -3.29                     & -3.40                 \\
+            9                   & -4.11                   & -4.08                     & -4.10                 \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+
+    利用最小二乘法对实验数据（质量 $m$ 与平均标尺读数 $\bar{n}$）进行线性拟合。
+
+    根据 MATLAB 拟合结果：
+    \begin{itemize}
+        \item 斜率 $k = \SI{-0.69554}{\centi\meter\per\kilo\gram}$
+        \item 线性相关系数 $R^2 = 0.99806$
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{./figures/4/data_plot.png}
+        \caption{标尺读数与质量的线性拟合图}
+        \label{fig:xianxingnihe}
+    \end{figure}
+
+    \subsubsection{杨氏模量计算}
+    根据公式 $E = \frac{8 g L D}{\pi d^2 b |k|}$，代入上述平均值：
+    $$ E = \frac{8 \times \SI{9.80}{} \times \SI{0.9872}{} \times \SI{1.3339}{}}{\pi \times (\SI{0.590e-3}{})^2 \times \SI{0.06918}{} \times \SI{0.0069554}{}} $$
+    计算得：
+    $$ E = \SI{1.96e11}{\pascal} $$
 
     \subsection{误差分析（20分）}
-    （运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+
+    \subsubsection{各分量不确定度计算 (A类与B类合成)}
+    对于多次测量量，合成不确定度保留与原始数据相同的小数位数。
+    公式：$u = \sqrt{u_A^2 + u_B^2}$，其中 $u_A = S/\sqrt{n}$，$u_B = \Delta_{\text{仪}}/\sqrt{3}$。
+
+    \begin{enumerate}
+        \item \textbf{长度 $L$} (6次测量，保留2位小数):
+              \begin{itemize}
+                  \item A类: $S_L \approx \SI{0.039}{\centi\meter}$，$u_{A,L} = \SI{0.016}{\centi\meter}$。
+                  \item B类: $\Delta_L = \SI{0.05}{\centi\meter}$，$u_{B,L} = \SI{0.029}{\centi\meter}$。
+                  \item 合成: $u_L = \sqrt{0.016^2 + 0.029^2} \approx \SI{0.033}{\centi\meter} \rightarrow \SI{0.03}{\centi\meter}$。
+              \end{itemize}
+
+        \item \textbf{标尺距离 $D$} (6次测量，保留2位小数):
+              \begin{itemize}
+                  \item A类: $S_D \approx \SI{0.546}{\centi\meter}$，$u_{A,D} = \SI{0.223}{\centi\meter}$。
+                  \item B类: $\Delta_D = \SI{0.05}{\centi\meter}$，$u_{B,D} \approx \SI{0.029}{\centi\meter}$。
+                  \item 合成: $u_D = \sqrt{0.223^2 + 0.029^2} \approx \SI{0.225}{\centi\meter} \rightarrow \SI{0.23}{\centi\meter}$。
+              \end{itemize}
+
+        \item \textbf{光杠杆常数 $b$} (6次测量，保留2位小数):
+              \begin{itemize}
+                  \item A类: $S_b \approx \SI{0.039}{\milli\meter}$，$u_{A,b} = \SI{0.016}{\milli\meter}$。
+                  \item B类: $\Delta_b = \SI{0.02}{\milli\meter}$，$u_{B,b} \approx \SI{0.012}{\milli\meter}$。
+                  \item 合成: $u_b = \sqrt{0.016^2 + 0.012^2} \approx \SI{0.020}{\milli\meter} \rightarrow \SI{0.02}{\milli\meter}$。
+              \end{itemize}
+
+        \item \textbf{直径 $d$} (6次测量，保留3位小数):
+              \begin{itemize}
+                  \item A类: $S_d \approx \SI{0.0034}{\milli\meter}$，$u_{A,d} \approx \SI{0.0014}{\milli\meter}$。
+                  \item B类: $\Delta_d = \SI{0.004}{\milli\meter}$，$u_{B,d} \approx \SI{0.0023}{\milli\meter}$。
+                  \item 合成: $u_d = \sqrt{0.0014^2 + 0.0023^2} \approx \SI{0.0027}{\milli\meter} \rightarrow \SI{0.003}{\milli\meter}$。
+              \end{itemize}
+
+        \item \textbf{斜率 $k$}:
+              由拟合得到统计不确定度 $u_k = \SI{0.01253}{\centi\meter\per\kilo\gram}$。
+    \end{enumerate}
+
+    \subsubsection{合成相对不确定度}
+    根据误差传递公式：
+    $$ \frac{u_E}{E} = \sqrt{\left(\frac{u_L}{L}\right)^2 + \left(\frac{u_D}{D}\right)^2 + \left(2\frac{u_d}{d}\right)^2 + \left(\frac{u_b}{b}\right)^2 + \left(\frac{u_k}{k}\right)^2} $$
+
+    各项相对不确定度：
+    \begin{itemize}
+        \item $\frac{u_L}{L} = \frac{0.03}{98.72} \approx 0.03\%$
+        \item $\frac{u_D}{D} = \frac{0.23}{133.39} \approx 0.17\%$
+        \item $2\frac{u_d}{d} = 2 \times \frac{0.003}{0.590} \approx 1.02\%$
+        \item $\frac{u_b}{b} = \frac{0.02}{69.18} \approx 0.03\%$
+        \item $\frac{u_k}{k} = \frac{0.01253}{0.69554} \approx 1.80\%$
+    \end{itemize}
+
+    合成计算：
+    $$ \frac{u_E}{E} = \sqrt{0.0003^2 + 0.0017^2 + 0.0102^2 + 0.0003^2 + 0.0180^2} $$
+    $$ \frac{u_E}{E} \approx \sqrt{9 \times 10^{-8} + 2.89 \times 10^{-6} + 1.04 \times 10^{-4} + 9 \times 10^{-8} + 3.24 \times 10^{-4}} $$
+    $$ \frac{u_E}{E} \approx \sqrt{4.31 \times 10^{-4}} \approx 2.08\% $$
+
+    \subsubsection{最终结果}
+    $$ u_E = \SI{1.96e11}{} \times 2.08\% \approx \SI{0.04e11}{\pascal} $$
+
+    实验结果最终表示为：
+    $$ E = \SI{1.96(0.04)e11}{\pascal}$$
 
     \subsection{实验探讨（10分）}
-    （对实验内容、现象和过程的小结，不超过100字。）
-
+    本实验采用光杠杆法与线性拟合（$R^2=0.998$）测量杨氏模量，
+    结果为 \SI{1.96(0.04)e11}{\pascal}。误差分析显示，
+    主要误差来源为标尺读数的线性度，即斜率的不确定度，还有金属丝直径测量误差。
+    通过多次测量，$D$ 的不确定度虽受随机波动影响（约 \SI{0.23}{\centi\meter}），
+    但对总体结果影响小于直径项的系数放大效应。
     \section{思考题（10分）}
-    （解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+    \subsection{伸长法测量钢丝的杨氏弹性模量中需要测量哪些物理量？分别用什么仪器测量？应估读到哪一位？}
+
+    本实验需要测量的物理量及其对应的测量仪器与读数精度如下表所示。
+    其中，长度测量需根据量程和精度要求选择合适的工具。
+
+    \begin{table}[H]
+        \centering
+        \caption{杨氏模量实验物理量测量及精度要求}
+        \begin{tabular}{ccc}
+            \toprule
+            物理量          & 测量仪器          & 读数精度/估读位                           \\
+            \midrule
+            金属丝原长 $L$    & 钢尺            & \SI{0.1}{\milli\meter} (估读)        \\
+            标尺至平面镜距离 $D$ & 钢卷尺           & \SI{0.1}{\milli\meter} (估读)        \\
+            光杠杆短臂 $b$    & 游标卡尺 ($0.02$) & \SI{0.02}{\milli\meter} (对齐读取，不估读) \\
+            金属丝直径 $d$    & 螺旋测微器         & \SI{0.001}{\milli\meter} (估读)      \\
+            标尺读数 $n$     & 望远镜标尺组        & \SI{0.1}{\milli\meter} (估读)        \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+
+    \subsection{加减砝码测量钢丝伸长量的过程中，如何及时检查所测得的数据？}
+
+    在实验过程中，依据胡克定律，在弹性限度内金属丝的伸长量应与受力成正比。
+    因此，每改变等量的砝码时，标尺读数的变化量 $\Delta n$ 应当在误差允许的范围内保持大致相等。
+
+    实验时，可以通过口算相邻两次读数的差值来实时监测数据。
+    如果发现某次加载后的差值与前几次相比出现显著跳跃或异常，
+    可能是由于光杠杆底座触碰了铁块凹槽或者砝码摆动未静止所致，此时应立即检查装置并重新测量。
+    此外，还应对比增重过程与减重过程在同一负载下的读数，若两者偏差过大，
+    则说明金属丝可能发生了塑性形变或光杠杆位置发生了移动。
+
+    \subsection{从光杠杆的放大倍数考虑，增大 $D$ 与减小 $b$ 都可以增加放大倍数，那么它们有何不同？是否可以无限制地增大放大倍数？}
+
+    根据光杠杆放大原理公式 $A = 2D/b$，
+    增大标尺距离 $D$ 或减小光杠杆短臂长 $b$ 确实都能提高放大倍数，
+    但两者的物理机制和限制条件不同，
+    且都不能无限制调整。
+
+    增大 $D$ 是通过增加反射光线的“力臂”来放大位移。
+    然而，$D$ 的增加受限于实验室空间和望远镜的光学性能。
+    过大的 $D$ 会导致望远镜视场中的标尺像变小、变暗，难以清晰读数；
+    同时，空气流动和地面微震对长光程的影响会显著增加，导致读数不稳。
+
+    减小 $b$ 则是通过减小光杠杆的底座跨度来增大平面镜的转角 $\theta$。然而，$b$ 的减小受限于光杠杆的机械稳定性。
+    若 $b$ 过小，光杠杆在平台上极易倾倒或发生晃动，难以保持平衡。
+    此外，该实验原理基于近似条件 $\tan\theta \approx \theta$，
+    若 $b$ 过小导致转角 $\theta$ 过大，近似条件带来的理论误差将会急剧上升。
+
+    因此，实验中应在保证装置稳定和读数清晰的前提下，合理选择 $D$ 和 $b$ 的值，以达到适宜的测量灵敏度。
 \end{fullreportonly}
 \insertnotes
 \end{document}
