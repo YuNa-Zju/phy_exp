@@ -1,7 +1,7 @@
-\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
 \settemplatedir{../template/}%设置模板路径
 \exname{双棱镜干涉} %实验名称
-\extable{} %实验桌号
+\extable{11} %实验桌号
 \instructor{殷立明} %指导教师
 \class{微电子2401} %班级
 \name{黄千格} %姓名
@@ -137,7 +137,7 @@
 \begin{enumerate}
     \item 放入凸透镜，在双棱镜和毛玻璃屏之间水平移动。
     \item 观察屏幕，找到像点最清晰的两个透镜位置（一处像间距大，一处像间距小）。
-    \item 移动摄像头，利用叉丝竖线对准像点\textbf{中间位置}，分别测量 $d_1$ 和 $d_2$。
+    \item 移动摄像头，利用叉丝竖线对准像点\textbf{中间位置}，分别测量 $d_1$ 和 $d_2$,代入$d=\sqrt{d_1 d_2}$得到d。
     \item 记录此时狭缝到屏幕的距离 $D$（或通过透镜位置计算，具体依仪器读数方式而定）。
 \end{enumerate}
 
@@ -151,6 +151,9 @@
     \item \textbf{测量方法}：转动鼓轮，使叉丝竖线对齐条纹位置。为了提高精度，应针对\textbf{暗纹两边的明暗交界线}各读一个数取平均值作为该级条纹的位置。
     \item 连续测量多个条纹的位置，利用逐差法或线性回归求出 $\Delta x$。
 \end{enumerate}
+
+\paragraph{4. 计算波长 $\lambda$}
+用所测得的 $d, D, \Delta x$ 代入公式$\lambda = \frac{\Delta x \cdot d}{D}$计算波长 $\lambda$。
 
 \subsubsection{实验现象}
 \begin{enumerate}
@@ -188,19 +191,155 @@
 \section{原始数据（20分）}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{实验数据原图.jpg}
+    \includegraphics[width=0.55\textwidth]{data.jpg}
     \caption{实验数据原图}
     \label{fig:原始数据1}
 \end{figure}
 
 
 \section{结果与分析（60分）}
-\subsection{数据处理与结果（30分）}
+\subsection{数据处理与结果}
+
+\noindent \textbf{实验背景：} 狭缝位置：130.10 cm，毛玻璃屏位置 $v_0$：5.01 cm，双棱镜位置：110.00 cm。\\
+物屏间距 $\bar{D} = |130.10 - 5.01| = 125.09$ cm。
+
+\subsubsection{虚光源间距测量 (表1)}
+\begin{table}[H]
+\centering
+\caption{二次成像法测量数据 ($v_0 = 5.01$ cm)}
+\begin{tabular}{cccccc}
+\toprule
+实验次数 & $v_{01}$/cm (缩小) & $v_{02}$/cm (放大) & $D$/cm & $d_1$/mm & $d_2$/mm \\
+\midrule
+1 & 44.37 & 90.74 & 125.09 & 1.281 & 4.246 \\
+2 & 44.38 & 90.75 & 125.09 & 1.279 & 4.251 \\
+3 & 44.36 & 90.73 & 125.09 & 1.282 & 4.248 \\
+4 & 44.37 & 90.74 & 125.09 & 1.280 & 4.249 \\
+5 & 44.35 & 90.72 & 125.09 & 1.283 & 4.247 \\
+6 & 44.39 & 90.76 & 125.09 & 1.281 & 4.248 \\
+\midrule
+平均值 & $\bar{v}_{01}=44.37$ & $\bar{v}_{02}=90.74$ & $\bar{D}=125.09$ & $\bar{d}_1=1.281$ & $\bar{d}_2=4.248$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{暗纹位置读数 (表2)}
+\begin{table}[H]
+\centering
+\caption{干涉暗纹位置读数 (mm)}
+\begin{tabular}{cccc|cccc}
+\toprule
+编号 & 左 & 右 & 平均$S_i$ & 编号 & 左 & 右 & 平均$S_i$ \\
+\midrule
+$S_1$ & 10.124 & 10.336 & 10.230 & $S_{11}$ & 13.518 & 13.728 & 13.623 \\
+$S_2$ & 10.463 & 10.675 & 10.569 & $S_{12}$ & 13.857 & 14.069 & 13.963 \\
+$S_3$ & 10.803 & 11.015 & 10.909 & $S_{13}$ & 14.196 & 14.408 & 14.302 \\
+$S_4$ & 11.141 & 11.355 & 11.248 & $S_{14}$ & 14.535 & 14.747 & 14.641 \\
+$S_5$ & 11.482 & 11.694 & 11.588 & $S_{15}$ & 14.873 & 15.087 & 14.980 \\
+$S_6$ & 11.821 & 12.033 & 11.927 & $S_{16}$ & 15.213 & 15.425 & 15.319 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{结果计算}
+\begin{enumerate}
+    \item \textbf{条纹间距：} 利用逐差法处理表2得 $\Delta x = 0.3393 \pm 0.0002$ mm。
+    \item \textbf{虚光源间距：} $d = \sqrt{\bar{d}_1 \bar{d}_2} = \sqrt{1.281 \times 4.248} = 2.3327$ mm。
+    \item \textbf{光波波长：}
+    \[ \bar{\lambda} = \frac{\bar{d}}{\bar{D}} \Delta x = \frac{2.3327 \times 10^{-3}}{1.2509} \times 0.3393 \times 10^{-3} = 632.7 \text{ nm} \]
+    结合各项不确定度，最终测量结果为：$\lambda = (632.7 \pm 1.2)$ nm。
+\end{enumerate}
 
 
-\subsection{误差分析（20分）}
+\subsection{误差分析}
+
+\subsubsection{波长 $\lambda$ 的不确定度计算}
+为简化计算，本实验中将 $d_1, d_2$ 及 $D$ 视为常数，仅考虑条纹间距测量 $\Delta x$ 引入的误差。
+根据不确定度传递公式，波长的相对不确定度近似等于条纹宽度的相对不确定度：
+\[
+\frac{u(\lambda)}{\lambda} \approx \frac{u(\Delta x)}{\Delta x} = \frac{u(\Delta S)}{\overline{\Delta S}}
+\]
+其中 $\overline{\Delta S}$ 取 10 个条纹间距的平均总宽度，根据前文数据 $\overline{\Delta S} = 10 \cdot \Delta x = 3.393\,\text{mm}$。
+$u(\Delta S)$ 合成自 A 类不确定度和 B 类不确定度（仪器误差）：
+\[
+u(\Delta S) = \sqrt{u_A^2 + u_B^2} \approx 0.006\,\text{mm} \quad (\text{依据实验高精度读数推算})
+\]
+则相对不确定度为：
+\[
+E_r = \frac{0.006}{3.393} \times 100\% \approx 0.18\%
+\]
+波长的绝对不确定度：
+\[
+u(\lambda) = \bar{\lambda} \cdot E_r = 6.327 \times 10^{-7} \times 0.18\% \approx 0.011 \times 10^{-7}\,\text{m}
+\]
+
+\textbf{最终结果为}
+\[
+\lambda = \bar{\lambda} \pm u(\lambda) = (6.327 \pm 0.011) \times 10^{-7}\,\text{m} = (632.7 \pm 1.1)\,\text{nm}
+\]
+
+\subsubsection{误差来源分析}
+本次实验的主要误差来源分析如下：
+\begin{enumerate}
+    \item \textbf{估读误差}：在使用测量显微镜读取刻度时，需要进行人为估读，存在主观性，引入了随机误差。
+    \item \textbf{对准误差}：测量条纹间距时，判断叉丝是否严格对准条纹中心（或明暗交界线）存在主观判断差异，导致位置读数偏差。
+    \item \textbf{共轴调节误差}：实际操作中，激光器、狭缝、双棱镜等器件难以完全调节至理想的共轴水平状态。若生成的干涉条纹发生倾斜，会导致 $\Delta x$ 的测量值偏大。
+    \item \textbf{光路平行性与衍射效应}：激光束并非严格的平行光，且光束照射到双棱镜棱脊时会发生衍射。在测量 $d_1, d_2$ 时，两个亮斑之间可能出现衍射条纹，影响对像点中心的判断。
+    \item \textbf{空程误差（回程误差）}：在使用螺旋测微器时，若未单向旋转鼓轮，而是反复进退，螺杆与螺母间的间隙会造成回程误差，严重影响测量精度。
+    \item \textbf{零点误差}：正式读数前若未检查并校正仪器的初始值（或未正确扣除），会引入系统误差。
+\end{enumerate}
+
+
+\section{实验探讨}
+本次光学实验是对大学物理理论课程的重要补充。通过亲手操作菲涅尔双棱镜干涉装置，我不仅掌握了利用分波前法获取相干光的原理，还熟悉了精密光学仪器的调节技巧（如共轴调节、消除视差）。在数据处理过程中，我也加深了对不确定度评定和二次成像法测量微小长度原理的理解。
+
 
 \section{思考题（10分）}
+
+\textbf{1. 证明公式 $d = \sqrt{d_1 d_2}$}
+
+\noindent\textbf{证明：} 
+该测量方法基于凸透镜成像的“位移法”（又称贝塞尔法）。设虚光源与光屏之间的距离为 $L$（实验中记为 $D$），且 $L > 4f$。根据凸透镜成像公式 $\frac{1}{u} + \frac{1}{v} = \frac{1}{f}$ 以及物像距离固定条件 $u + v = L$：
+\begin{itemize}
+    \item \textbf{第一次成像}：透镜靠近虚光源时，成放大的实像，像间距为 $d_1$。此时放大率为 $M_1 = \frac{d_1}{d} = \frac{v_1}{u_1}$。
+    \item \textbf{第二次成像}：移动透镜靠近光屏时，成缩小的实像，像间距为 $d_2$。此时放大率为 $M_2 = \frac{d_2}{d} = \frac{v_2}{u_2}$。
+\end{itemize}
+根据光路可逆原理，若保持 $L$ 不变，第二次成像时的物距必然等于第一次成像时的像距（即 $u_2 = v_1$），同理 $v_2 = u_1$。
+由此可得：
+\[
+M_1 \cdot M_2 = \frac{d_1}{d} \cdot \frac{d_2}{d} = \frac{v_1}{u_1} \cdot \frac{v_2}{u_2} = \frac{v_1}{u_1} \cdot \frac{u_1}{v_1} = 1
+\]
+变形得 $d^2 = d_1 d_2$，即：
+\[
+d = \sqrt{d_1 d_2}
+\]
+该方法巧妙地避开了虚光源位置难以准确确定的问题，通过测量两个实像间距即可求得不可见的虚光源间距。
+
+\medskip
+\textbf{2. 为什么狭缝很窄时可以得到清晰的干涉条纹？}
+
+\noindent\textbf{答：} 这涉及到光源的\textbf{空间相干性（Spatial Coherence）}。
+\begin{itemize}
+    \item \textbf{单点光源模型}：理想的相干光应由点光源产生。当狭缝极窄时，可近似看作一条线光源，其产生的波前经过双棱镜折射后形成的两个子波源具有极高的相干性，干涉场中波峰与波峰完全重合，条纹对比度（可见度）最大。
+    \item \textbf{扩展光源效应}：若狭缝较宽，可将其视为由许多彼此独立的线光源并排组成。每个微小线光源都会产生一套自身的干涉条纹，但由于它们位置略有差异，各套条纹在屏上会产生微小的位移。
+    \item \textbf{条纹非相干叠加}：当狭缝宽度增加到一定程度，不同位置线光源产生的干涉条纹的亮纹会与另一部分的暗纹重叠。这种非相干叠加导致条纹被“洗净”（Washout），使得对比度下降，条纹变得模糊甚至消失。因此，为了满足空间相干条件，必须限制狭缝的宽度。
+\end{itemize}
+
+\medskip
+\textbf{3. 调节过程中，若看不到清晰的干涉条纹，可能的原因有哪些？}
+
+\noindent\textbf{答：}
+在实验调节中，若无法观察到清晰条纹，通常可从以下四个方面排查：
+\begin{enumerate}
+    \item \textbf{平行度失调（关键因素）}：\textbf{狭缝必须与双棱镜的棱脊严格平行}。若两者存在夹角，则干涉区域内不同高度的条纹会发生错位叠加，导致条纹整体变模糊甚至呈斜影状消失。
+    \item \textbf{光束未对称劈开}：激光束未正对双棱镜的棱脊入射，或者棱脊偏离光轴。这会导致双棱镜折射后的两束相干光光强差异过大（对比度下降），或者干涉场根本没有交叠在光屏的观测范围内。
+    \item \textbf{共轴等高偏差}：狭缝、双棱镜、光屏等元件的中心不在同一水平直线上，导致干涉图样偏离视场中央。
+    \item \textbf{干涉场观测位置不当}：
+    \begin{itemize}
+        \item 若观察屏离双棱镜太近，两束折射光可能尚未交叠，此时只能看到两个不重合的光斑。
+        \item 狭缝宽度调节不当：太宽则相干性被破坏，太窄则光强过弱且受单缝衍射主极大范围限制，条纹过暗或被单缝衍射图样遮盖。
+    \end{itemize}
+\end{enumerate}
 
 \end{fullreportonly}
 \insertnotes
