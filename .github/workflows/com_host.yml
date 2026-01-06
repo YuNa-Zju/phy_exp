@@ -1,0 +1,151 @@
+# 工作流名称
+name: [Self-Hosted] # 编译LaTeX报告并发布ZIP包
+
+# 触发条件
+on:
+  push:
+    branches:
+      - master
+
+# 工作流任务
+jobs:
+  build_and_release:
+    # 关键修改 1: 指定在你自己的机器上运行
+    runs-on: self-hosted
+
+    permissions:
+      contents: write
+
+    steps:
+      # 第 1 步：检出仓库代码
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      # 第 2 步：清理旧的构建产物 (Self-hosted 独有步骤)
+      # 因为你的机器是持久化的，上一次编译的残留可能会影响这一次，所以先清理
+      - name: 清理工作区
+        run: |
+          rm -rf compiled_reports
+          rm -f *.zip
+          # 清理可能的 latex 中间文件
+          git clean -fdX || true
+
+      # 第 3 步：直接调用本地 Latexmk 编译
+      # 关键修改 2: 移除了 uses: xu-cheng/texlive-action，直接写 run
+      - name: 编译所有LaTeX报告
+        run: |
+          echo "--- 检查环境 ---"
+          latexmk -v
+
+          # 创建目标目录
+          mkdir -p compiled_reports
+
+          # 编译循环：逻辑保持不变，直接使用你原本的 find 逻辑
+          # 注意：这里假设字体已经在第一步通过 SSH 手动装好了，所以去掉了字体安装脚本
+          find . -type f -name "*.tex" ! -path "./template/*" ! -path "./大学物理实验-实验报告/*" ! -name "template.tex" | while read -r file; do
+            echo "-------------------------------------------"
+            echo "--- 开始编译文件: $file ---"
+
+            # 获取文件信息
+            dir=$(dirname "$file")
+            base_name=$(basename "$file" .tex)
+            
+            # 记录当前目录
+            current_dir=$(pwd)
+
+            # 进入目录编译
+            cd "$dir"
+
+            # 编译 LaTeX 文件
+            # -interaction=nonstopmode: 防止报错卡死
+            # -f: 强制模式，即使有小错误也尝试生成 PDF
+            latexmk -xelatex -interaction=nonstopmode -f -jobname="$base_name" "$base_name.tex" || echo "⚠️ 编译过程有报错，尝试继续..."
+
+            # 检查PDF是否生成
+            if [ -f "$base_name.pdf" ]; then
+              echo "--- 成功生成: $base_name.pdf ---"
+              # 移动文件
+              mv "$base_name.pdf" "$current_dir/compiled_reports/$base_name.pdf"
+            else
+              echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+              echo "!! 警告: 编译失败，未能生成 PDF: $base_name.pdf"
+              
+              # 打印日志以便调试
+              if [ -f "$base_name.log" ]; then
+                echo "!! 错误日志 (最后50行):"
+                tail -n 50 "$base_name.log"
+              fi
+              echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            fi
+
+            # 清理临时文件 (只在当前子目录清理)
+            latexmk -c
+
+            # 返回根目录
+            cd "$current_dir"
+          done
+
+      # 第 4 步: 检查编译结果
+      - name: 检查编译结果
+        run: |
+          echo "--- 检查 compiled_reports 目录 ---"
+          if [ -z "$(ls -A compiled_reports 2>/dev/null)" ]; then
+            echo "❌ 错误: 目录为空！没有成功编译任何 PDF。"
+            exit 1
+          else
+            echo "✅ 成功编译以下文件:"
+            ls -lh compiled_reports/
+          fi
+
+      # 第 5 步: 创建ZIP文件
+      - name: 创建ZIP压缩包
+        run: |
+          current_date=$(date +"%Y%m%d")
+          zip_name="实验报告_${current_date}_build_${{ github.run_number }}.zip"
+
+          cd compiled_reports
+          # 确保安装了 zip: sudo apt install zip
+          zip -r "../$zip_name" ./*
+          cd ..
+
+          echo "ZIP文件已创建: $zip_name"
+
+      # 第 6 步：生成Release正文
+      - name: 生成Release正文
+        run: |
+          cat > release_body.md << EOF
+          # 实验报告自动编译版本
+
+          **构建信息:**
+          - 提交: \`${{ github.sha }}\`
+          - 时间: $(date "+%Y-%m-%d %H:%M:%S")
+          - 运行环境: Self-hosted Runner (Ubuntu)
+
+          **包含的报告:**
+          EOF
+
+          cd compiled_reports
+          for pdf in *.pdf; do
+            if [ -e "$pdf" ]; then
+              echo "- $pdf" >> ../release_body.md
+            fi
+          done
+          cd ..
+
+          cat >> release_body.md << EOF
+
+          **下载说明:**
+          - 点击下方的 ZIP 文件下载所有报告
+          EOF
+
+      # 第 7 步：创建 Release 并上传ZIP
+      - name: 创建 Release 并上传ZIP
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: reports-${{ github.run_id }}-${{ github.run_number }}
+          name: 实验报告合集 (Build ${{ github.run_number }})
+          body_path: release_body.md
+          draft: false
+          make_latest: true
+          files: |
+            *.zip
