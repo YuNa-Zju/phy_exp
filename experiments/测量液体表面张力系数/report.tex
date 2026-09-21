@@ -1,0 +1,279 @@
+\documentclass[]{../../templates/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../../templates/Report}
+\settemplatedir{../../templates/}%设置模板路径
+\sisetup{
+    separate-uncertainty = true,
+    per-mode = symbol
+}
+\usepackage{multirow}
+
+\exname{测量液体表面张力系数} %实验名称
+\extable{} %实验桌号
+\instructor{} %指导教师
+\class{} %班级
+\name{} %姓名
+\stuid{} %学号
+
+\nyear{} %年
+\nmonth{} %月
+\nday{} %日
+\nweekday{} %星期几，e.g. \nweekday{三}
+\daypart{}%上午/下午
+
+\redate{} %如有实验补做，补做日期
+\resitu{} %情况说明：
+
+\begin{document}
+\maketitle%输出封面
+
+\section{预习报告（10分）}
+（注：将已经写好的“物理实验预习报告”内容拷贝过来）
+
+\subsection{实验综述（5分）}
+（自述实验现象、实验原理和实验方法，包括必要的光路图、电路图、公式等。不超过500字。）
+\subsubsection{实验步骤}
+1）力敏传感器开机预热
+\par
+2）清洗圆环、容器
+\par
+3）容器中加入待测液体（蒸馏水）
+\par
+4）安装砝码盘，力传感器的定标
+\par
+5）取下砝码盘，安装铝圆环，测量液体表面张力
+\par
+6）计算表面张力系数以及不确定度
+
+
+\subsubsection{实验原理}
+\textbf{用拉脱法测定液体表面张力系数}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/diagrams/拉脱法_实验原理示意图.png}
+    \caption{拉脱法实验原理示意图}
+\end{figure}
+
+\par
+将一洁净的圆筒形吊环浸入液体中，然后缓慢地提起吊环，圆筒形吊环将带起一层液膜。使液面收缩的表面张力f沿液面的切线方向，角$\phi$称为湿润角（或接触角）。当继续提起圆筒形吊环时，$\phi$角逐渐变小而接近为零，这时所拉出的液膜的里、外两个表面的张力f均垂直向下，设拉起液膜破裂时的拉力为F，则有：
+\par
+$F = (m+m_0)g + 2f$ \quad 式中，m为粘附在吊环上的液体的质量，$m_0$为吊环质量。
+\par
+因表面张力的大小与接触面周边界长度成正比，则有：
+\par
+$2f = \pi (D_\text{内} + D_\text{外})\times \alpha$ \quad 式中，比例系数$\alpha$称为表面张力系数，单位为N/m，$\alpha$在数值上等于单位长度上的表面张力。
+\par
+将公式化简得：
+$\alpha = \frac{F - (m+m_0)g}{\pi (D_\text{内}+D_\text{外})}$
+\par
+由于金属膜很薄，被拉起的液膜也很薄，m很小可以忽略，于是公式简化为：
+\par
+$\alpha = \frac{F - m_0 g}{\pi (D_\text{内}+D_\text{外})}$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/diagrams/拉脱法_实验原理.png}
+    \caption{拉脱法实验原理}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/diagrams/拉脱法_实验原理2.png}
+    \caption{拉脱法实验原理}
+\end{figure}
+
+
+\subsection{实验重点（3分）}
+（简述本实验的学习重点，不超过100字。）
+\par
+(1)\textbf{了解液体表面张力的性质}
+\par
+(2)\textbf{理解液体表面张力的测量原理：}观察拉脱法测定液体表面张力系数的物理过程和物理现象，并用物理学基本概念和定律进行分析和研究，加深对物理规律的认识和理解。
+\par
+(3)\textbf{掌握微小力的测量}
+\par
+(4)\textbf{掌握不确定度的分析}
+
+
+\subsection{实验难点（2分）}
+（简述本实验的实现难点，不超过100字。）
+\par
+(1)\textbf{吊环拉断液柱瞬间读数的准确捕捉：}实验中需在吊环拉断液柱的瞬间读取数字电压表的峰值读数，该时刻极短，若操作或观察不及时，易导致读数偏差。
+\par
+(2)\textbf{接触角（湿角）对测量的影响：}理想情况下，吊环拉起液膜时湿角$\theta$应接近零，此时表面张力方向垂直向下。但实际中若吊环或液体不洁净，$\theta$角可能不为0，导致张力分解方向偏离理论假设，引入测量误差。
+\par
+(3)\textbf{仪器洁净度的严格要求：}清洗有机玻璃器皿和吊环”是关键前置步骤。若容器或吊环残留杂质，会改变液体润湿性，影响接触角和液膜稳定性，导致表面张力系数测量不准确。
+\par
+(4)\textbf{液面升降速度的控制：}需严格控制液面下降速度，并专注观察液膜破裂瞬间的仪表变化。速度过快会导致液膜受力不均或提前破裂，过慢则可能因蒸发等因素改变液体性质。
+\par
+(5)\textbf{数据处理：}需正确计算表面张力系数及不确定度，确保实验结果的可靠性。
+
+\begin{fullreportonly}
+\section{原始数据（20分）}
+（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+
+\section{结果与分析（60分）}
+\subsection{数据处理与结果（30分）}
+（列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+\subsubsection{实验一：用逐差法求仪器的转换系数 K}
+初读数$V_0 = 39.0mV$
+\begin{table}[H]
+    \centering
+    \caption{实验一数据记录与处理}
+    \begin{tabular}{|p{6em}|c|c|c|c|}
+        \hline
+        \textbf{砝码个数($500.00 \times 10^{-6}kg$)} & \textbf{增重读数$V'_i$(mV)} & \textbf{减重读数$V''_i$(mV)} & $V_i = \frac{V'_i + V''_i}{2}$(mV) & \textbf{等间距逐差：$\delta V_i = \frac{1}{4}(V_{i+4} - V_i)$(mV)}  \\
+        \hline
+        0 & 39.0 & 38.2 & 38.6 & \multirow{2}{*}{$\delta V_1=\frac{1}{4}(V_4-V_0) = 6.6$} \\
+        \cline{1-4}
+        1 & 45.8 & 44.8 & 45.3 &  \\
+        \hline
+        2 & 51.8 & 51.4 & 51.6 & \multirow{2}{*}{$\delta V_2=\frac{1}{4}(V_5-V_1) = 6.575$} \\
+        \cline{1-4}
+        3 & 58.8 & 58.0 & 58.4 &  \\
+        \hline
+        4 & 65.6 & 64.4 & 65.0 & \multirow{2}{*}{$\delta V_3=\frac{1}{4}(V_6-V_2) = 6.6$} \\
+        \cline{1-4}
+        5 & 72.0 & 71.2 & 71.6 &  \\
+        \hline
+        6 & 78.2 & 77.8 & 78.0 & \multirow{2}{*}{$\delta V_4=\frac{1}{4}(V_7-V_3) = 6.925$} \\
+        \cline{1-4}
+        7 & 87.5 & 84.7 & 86.1 &  \\
+        \hline
+        \multicolumn{5}{|c|}{每500.00mg对应的电子秤的mV读数$\bar{\delta V} = \frac{1}{4}(\delta V_1 + \delta V_2 + \delta V_3 + \delta V_4) = 6.675(mV)$}  \\
+        \hline
+    \end{tabular}
+\end{table}
+转换系数 K = $\frac{mg}{\bar{\delta V}} = \frac{500 \times 10^{-6} \times 9.793}{6.675} = 7.336 \times 10^{-4} \quad (N/mV)$
+
+\subsubsection{实验二：用拉脱法求拉力对应的电子秤读数}
+水温（室温）：20.9℃，电子秤初始读数$V_0 = 42.1(mV)$
+\begin{table}[H]
+    \centering
+    \caption{实验二数据记录与处理}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{测量次数} & \textbf{拉脱时最大读数$V_1$(mV)} & \textbf{吊环读数$V_2$(mV)} & \textbf{表面张力对应读数$V = V_1 - V_2$(mV)}  \\
+        \hline
+        1 & 66.2 & 43.0 & 23.2  \\
+        \hline
+        2 & 67.0 & 43.1 & 23.9  \\
+        \hline
+        3 & 67.0 & 43.0 & 24.0  \\
+        \hline
+        4 & 65.0 & 42.6 & 22.4  \\
+        \hline
+        5 & 65.3 & 42.4 & 22.9  \\
+        \hline
+        \textbf{平均值} & & & $\bar{V} = 23.28$  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{实验三：吊环的内、外直径}
+\begin{table}[H]
+    \centering
+    \caption{实验三数据记录与处理}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{测量次数} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{平均值(mm)}  \\
+        \hline
+        \textbf{内径$D_\text{内}$(mm)} & 32.80 & 33.00 & 32.84 & 33.02 & $\bar{D_\text{内}}=32.92$  \\
+        \hline
+        \textbf{外径$D_\text{外}$(mm)} & 34.84 & 34.84 & 34.74 & 34.78 & $\bar{D_\text{外}}=34.80$  \\
+        \hline
+    \end{tabular}
+\end{table}
+$\bar{L} = \pi (\bar{D_\text{内}}+\bar{D_\text{外}}) = 212.75mm$
+
+\subsubsection{计算液体表面张力系数}
+$\bar{\alpha} = \frac{\bar{K} \times \bar{V}}{\bar{L}} = \frac{7.336\times 10^{-4} \times 23.28}{212.75 \times 10^{-3}}= 8.027 \times10^{-2}N/m$
+
+\subsection{误差分析（20分）}
+（运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
+\par
+\subsubsection{不确定度的计算与分析：}
+\par
+不确定度计算公式：$\Delta_B(x) = \frac{\Delta_\text{仪}}{p} \quad p = \sqrt{3}$
+\par
+$\Delta_A(x) = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n(n - 1)}}$
+\quad
+$\Delta(x) = \sqrt{\Delta_A(x)^2 + \Delta_B(x)^2}$
+\begin{table}[H]
+    \centering
+    \caption{不确定度计算}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+         & \textbf{定标时读数$\Delta V/mV$} & \textbf{测力时读数V/mV} & \textbf{接触面长度L/mm}  \\
+        \hline
+        \textbf{测量仪器} & \textbf{电子秤} & \textbf{电子秤} & \textbf{游标卡尺}  \\
+        \hline
+        \textbf{量差允许$\Delta_\text{仪}$} & $\pm0.1mV$ & $\pm0.1mV$ & $\pm0.02mm$  \\
+        \hline
+        \textbf{$\Delta_B(x)$} & $\pm0.1mV$ & $\pm0.1mV$ & $\pm0.01mm$  \\
+        \hline
+        \textbf{$\Delta_A(x)$} & 0.0835 & 0.3023 & 内径：0.0557；外径：0.0245；$\Delta_A(D) = 0.0609$  \\
+        \hline
+        \textbf{$\Delta(x)$} & $\Delta(\Delta V)=0.1mV$ & $\Delta(V)=0.3mV$ & $\Delta(L)=\pi \Delta(D) = 0.19mm$  \\
+        \hline
+        \textbf{测量平均值$\bar{x}$} & $\Delta V = 6.7mV$ & $\bar{V} = 23.3mV$ & $\bar{L}=12.75mm$  \\
+        \hline
+    \end{tabular}
+\end{table}
+$\frac{\Delta \alpha}{\bar{\alpha}} = \sqrt{(\frac{\Delta (\Delta V)}{\bar{\Delta V}})^2 + (\frac{\Delta V}{\bar{V}})^2 + (\frac{\Delta L}{\bar{L}})^2} = 0.0198$
+\par
+结合$\bar{\alpha} = 8.027 \times10^{-2}$，可得$\Delta \alpha = 0.159\times10^{-2}$
+\par
+液体表面张力系数$\alpha = \bar{\alpha} \pm \Delta \alpha = (8.03 \pm 0.16)\times10^{-2}N/m$
+
+\subsubsection{误差来源分析}
+(1)\textbf{仪器误差}
+\par
+测量工具精度限制：力传感器的灵敏度不足会引入误差。
+\par
+
+(2)\textbf{操作误差}
+\par
+液膜状态影响：拉起液膜时，若速度过快易导致液膜破裂或形成非对称形状。
+\par
+接触角偏差：实际实验中液体与测量工具（如铂金环）的接触角并非理想的零角，接触角θ的存在会使表面张力计算公式中$\cos \theta$项产生偏差，尤其当液体润湿性较差时误差更显著。
+\par
+
+(3)\textbf{环境影响}
+\par
+温度波动：液体表面张力系数随温度升高而减小,环境温度变化会直接影响测量结果。
+\par
+液体纯度不足：若液体中含有杂质（如灰尘、油污），会降低表面张力系数，导致测量值偏低；多次测量后液体表面可能残留杂质，需及时更换样品。
+\par
+外界干扰：实验台振动、气流扰动会导致液面不稳定，或使拉力测量出现波动。
+
+\subsection{实验探讨（10分）}
+（对实验内容、现象和过程的小结，不超过100字。）
+\par
+\par
+通过本次实验，我学习了液体表面张力的性质，理解了液体表面张力的测量原理，掌握了微小力的测量方法，学会了利用逐差法处理实验数据，熟练了不确定度的计算。同时，我在实验中学会熟练地使用游标卡尺、电子秤等测量工具。
+\par
+对于实验原理中不易直接测量的物理量（拉力F），本实验使用硅压阻力敏传感器，实现了将\textbf{微小量放大}。同时，此\textbf{放大}的实现需要我们在正式实验前进行标定。这一实验思路让我深受启发。
+\par
+该实验锻炼了我的耐心、动手操作能力和数据处理能力，同时对物理学中\textbf{“微小量放大”}的思想有了更深的认识。
+
+\section{思考题（10分）}
+（解答教材或讲义或老师布置的思考题，请先写题干，再作答。）
+\subsection{在圆环上提水膜即将破裂时$F=mg+F_\text{拉}$成立,若过早读数,对实验结果会有什么影响?}
+过早读数会导致测量的表面张力系数偏小。
+\par
+在拉脱法测量中，圆环上提水膜的过程中，表面张力产生的拉力$F_\text{拉}$会随水膜的拉伸逐渐增大，直至水膜即将破裂时达到最大值（此时$F_\text{拉}=F-mg$，F为弹簧测力计示数，mg为圆环重力）。若过早读数（即水膜未达到即将破裂的临界状态），此时记录的 F 尚未达到最大值,代入公式$\alpha = \frac{F - m_0 g}{\pi (D_\text{内}+D_\text{外})}$，导致表面张力系数$\delta$的测量值比真实值偏小。
+
+\subsection{圆环或玻璃容器不清洁,$\delta$会有什么变化?}
+圆环或玻璃容器不清洁会导致测量的液体表面张力系数$\delta$偏小。
+\par
+杂质引入降低表面张力：圆环或容器表面的油污、灰尘等杂质会溶解或附着在液体表面，破坏液体分子间的内聚力。杂质分子占据液体表面后，减少了液体分子间的相互吸引力，导致液体实际表面张力系数真实值减小。
+\par
+不清洁的表面会降低液体对圆环的浸润性：使液体与圆环的接触角$\theta$增大（理想情况为$\theta = 0°$，此时$\cos \theta = 1$）。示意图如下：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/diagrams/思考题2分析示意图.JPG}
+    \caption{思考题2分析示意图}
+\end{figure}
+
+\end{fullreportonly}
+\insertnotes
+\end{document}
