@@ -87,8 +87,7 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: 实验报告合集 (Build ${{ github.run_number }})
           body: |
-            全部实验报告已通过 TeX 身份字段检查、路径检查及 XeLaTeX 编译。
-            ZIP 按实验目录保存各报告版本。原始照片按仓库约定原样保留，未做隐私检查。
+            实验报告 PDF 按实验目录打包，下载下方 reports.zip 解压查看。
             对应提交：${{ github.sha }}
           files: build/reports.zip
           fail_on_unmatched_files: true

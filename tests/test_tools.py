@@ -147,20 +147,47 @@ class ExperimentTests(unittest.TestCase):
         self.temp.cleanup()
 
     def test_create_chinese_space_and_preview(self):
-        directory = new_experiment.create_experiment(self.root, "单摆 实验_示例", preview=True)
-        text = (directory / "report.tex").read_text()
+        report = new_experiment.create_experiment(self.root, "单摆 实验_示例", preview=True)
+        text = report.read_text()
         self.assertIn("[yuxi]", text)
         self.assertIn("../../templates/Report", text)
         self.assertIn(tex("name", ""), text)
         self.assertIn(tex("stuid", ""), text)
-        self.assertTrue((directory / "figures/plots/.gitkeep").exists())
+        self.assertTrue((report.parent / "figures/plots/.gitkeep").exists())
 
     def test_existing_experiment_is_not_overwritten(self):
-        directory = new_experiment.create_experiment(self.root, "单摆")
-        (directory / "report.tex").write_text("已填写")
-        with self.assertRaises(FileExistsError):
+        first = new_experiment.create_experiment(self.root, "单摆")
+        first.write_text("已填写")
+        notes = first.parent / "README.md"
+        notes.write_text("已有的实验说明")
+        figure = first.parent / "figures/photos/记录.jpg"
+        figure.write_bytes(b"existing-photo")
+        second = new_experiment.create_experiment(self.root, "单摆")
+        third = new_experiment.create_experiment(self.root, "单摆", preview=True)
+        self.assertEqual(second.name, "report-02.tex")
+        self.assertEqual(third.name, "report-03.tex")
+        self.assertIn("[yuxi]", third.read_text())
+        self.assertEqual(first.read_text(), "已填写")
+        self.assertEqual(notes.read_text(), "已有的实验说明")
+        self.assertEqual(figure.read_bytes(), b"existing-photo")
+
+    def test_numbering_continues_after_highest_existing_version(self):
+        first = new_experiment.create_experiment(self.root, "单摆")
+        (first.parent / "report-04.tex").write_text("已有第四份")
+        fifth = new_experiment.create_experiment(self.root, "单摆")
+        self.assertEqual(fifth.name, "report-05.tex")
+        (first.parent / "report-99.tex").touch()
+        self.assertEqual(new_experiment.create_experiment(self.root, "单摆").name, "report-100.tex")
+
+    def test_empty_existing_directory_gets_first_report(self):
+        (self.root / "experiments/单摆").mkdir(parents=True)
+        self.assertEqual(new_experiment.create_experiment(self.root, "单摆").name, "report.tex")
+
+    def test_existing_experiment_symlink_is_rejected(self):
+        (self.root / "experiments").mkdir()
+        (self.root / "experiments/单摆").symlink_to(self.root / "templates", target_is_directory=True)
+        with self.assertRaises(ValueError):
             new_experiment.create_experiment(self.root, "单摆")
-        self.assertEqual((directory / "report.tex").read_text(), "已填写")
 
     def test_path_traversal_and_tex_injection_are_rejected(self):
         for name in ("../test", "/tmp/test", "a/b", "a%comment", "a" + chr(92) + "input{evil}", "", " 单摆"):
