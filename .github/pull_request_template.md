@@ -1,12 +1,6 @@
-本次新增或修改的实验：
+实验名称：
 
-修改内容及原因：
+修改说明：
 
-验证结果：
-
-- [ ] 已运行 `python3 scripts/privacy.py --check --staged`，TeX 中不含学生姓名和学号
-- [ ] 已运行 `python3 scripts/check_repository.py`，图片与模板引用正常
-- [ ] 已编译修改的报告，并检查结果
-- [ ] 未提交 `.private/`、本地身份配置或编译产物
-
-补充说明（若有）：
+- [ ] 已生成 PDF 并检查报告内容
+- [ ] 已运行 `python3 scripts/privacy.py --fix` 并检查 TeX 中的姓名和学号
