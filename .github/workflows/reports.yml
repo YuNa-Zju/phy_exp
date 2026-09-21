@@ -1,0 +1,94 @@
+name: Reports
+
+on:
+  pull_request:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reports-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Privacy and structure
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check TeX student fields
+        run: python3 scripts/privacy.py --check --staged
+      - name: Check report paths
+        run: python3 scripts/check_repository.py
+      - name: Test repository tools
+        run: python3 -m unittest discover -s tests -v
+
+  build:
+    name: Compile reports
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build with TeX Live 2026
+        uses: xu-cheng/texlive-action@v3
+        with:
+          texlive_version: 2026
+          os: debian
+          scheme: full
+          run: |
+            if ! command -v python3 >/dev/null; then
+              apt-get update
+              apt-get install -y python3
+            fi
+            python3 scripts/build_reports.py --jobs 2 --zip
+      - name: Upload build logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs
+          path: build/logs/
+          retention-days: 7
+      - name: Upload compiled reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: build/reports.zip
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish reports
+    needs: [checks, build]
+    if: github.event_name == 'push' && github.repository == 'YuNa-Zju/phy_exp' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: reports
+          path: build/
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: reports-${{ github.run_id }}-${{ github.run_attempt }}
+          target_commitish: ${{ github.sha }}
+          name: 实验报告合集 (Build ${{ github.run_number }})
+          body: |
+            全部实验报告已通过 TeX 身份字段检查、路径检查及 XeLaTeX 编译。
+            ZIP 按实验目录保存各报告版本。原始照片按仓库约定原样保留，未做隐私检查。
+            对应提交：${{ github.sha }}
+          files: build/reports.zip
+          fail_on_unmatched_files: true

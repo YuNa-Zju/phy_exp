@@ -1,7 +1,15 @@
-# -*- mode: gitignore; -*-
+# 本地身份信息、备份和构建产物不进入 Git。
+.private/
+build/
+compiled_reports/
+*.local.tex
+*.local.json
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
 
-## 1. 忽略所有编译产生的中间文件
-# 通常是 LaTeX 或其他编译工具生成的临时文件
+# LaTeX 中间文件与报告 PDF；配图和参考资料中的 PDF 可以提交。
 *.aux
 *.log
 *.toc
@@ -13,14 +21,11 @@
 *.synctex.gz*
 *.fls
 *.fdb_latexmk
-_minted*
-
-## 2. 忽略所有编译出来的 PDF 文件
-*.pdf
-!*/figures/*/*.pdf
-!*/figure/*/*.pdf
-## 3. 但是不忽略 "浙江大学.pdf"
-# 注意：! 开头的例外规则必须放在忽略规则之后才能生效
-!浙江大学.pdf
-!大物绪论_误差分析.pdf
+*.xdv
 *.cut
+_minted*
+*.pdf
+!experiments/**/figures/**/*.pdf
+!templates/figures/*.pdf
+!references/*.pdf
+*.zip
